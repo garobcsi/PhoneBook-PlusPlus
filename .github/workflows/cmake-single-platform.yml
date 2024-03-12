@@ -31,9 +31,17 @@ jobs:
       # Build your program with the given configuration
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
+    - name: Configure CMake Test
+
+      run: cmake -B ${{github.workspace}}/build/test -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DTEST=ON
+
+    - name: Build Test
+
+      run: cmake --build ${{github.workspace}}/build/test --config ${{env.BUILD_TYPE}} 
+
     - name: Test
-      working-directory: ${{github.workspace}}/build
+      working-directory: ${{github.workspace}}/build/test
       # Execute tests defined by the CMake configuration.
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: ctest -C ${{env.BUILD_TYPE}}
+      run: ./TheGameOfLife
 
