@@ -1,3 +1,3 @@
-add_subdirectory(game)
+add_subdirectory(phonebook)
 add_subdirectory(lib)
 add_subdirectory(terminal)

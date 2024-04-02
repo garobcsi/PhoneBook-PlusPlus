@@ -11,7 +11,7 @@ cmake_minimum_required(VERSION 3.27)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-project(TheGameOfLife)
+project(PhoneBook)
 if (NOT TEST)
     add_executable(${PROJECT_NAME} main.cpp)
 else ()
