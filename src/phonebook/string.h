@@ -9,9 +9,9 @@
  */
 class String
 {
-    //Karakter láncot tároló pointer
+    // Karakter láncot tároló pointer
     char *str;
-    //Karakter lánc hossza
+    // Karakter lánc hossza
     size_t len;
 
 public:
@@ -123,7 +123,7 @@ public:
      * @param rhs Az összefűzendő String objektum.
      * @return Az összefűzés eredményeként létrejövő új String objektum.
      */
-    friend inline String operator+(char lhs, const String &rhs);
+    friend String operator+(char lhs, const String &rhs);
 };
 
 #endif // PHONEBOOK_STRING_H
