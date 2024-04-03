@@ -348,7 +348,7 @@ OPTIMIZE_OUTPUT_SLICE  = NO
 #
 # Note see also the list of default file extension mappings.
 
-EXTENSION_MAPPING      =
+EXTENSION_MAPPING      = .h=C++,.cpp=C++
 
 # If the MARKDOWN_SUPPORT tag is enabled then doxygen pre-processes all comments
 # according to the Markdown format, which allows for more readable
@@ -573,7 +573,7 @@ EXTRACT_LOCAL_METHODS  = YES
 # are hidden.
 # The default value is: NO.
 
-EXTRACT_ANON_NSPACES   = NO
+EXTRACT_ANON_NSPACES   = YES
 
 # If this flag is set to YES, the name of an unnamed parameter in a declaration
 # will be determined by the corresponding definition. By default unnamed
@@ -990,7 +990,8 @@ INPUT_FILE_ENCODING    =
 # *.f18, *.f, *.for, *.vhd, *.vhdl, *.ucf, *.qsf and *.ice.
 
 FILE_PATTERNS          = *.cpp \
-                         *.hpp
+                         *.hpp \
+                         *.h
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
 # be searched for input files as well.

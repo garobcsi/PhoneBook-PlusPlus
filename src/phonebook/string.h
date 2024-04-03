@@ -9,7 +9,9 @@
  */
 class String
 {
+    //Karakter láncot tároló pointer
     char *str;
+    //Karakter lánc hossza
     size_t len;
 
 public:
