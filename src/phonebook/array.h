@@ -4,26 +4,93 @@
 #include <cstring>
 #include <algorithm>
 
+/**
+ * @brief Dinamikus tömb osztálysablon.
+ *
+ * Ez az osztály dinamikus tömb megvalósítást biztosít különféle műveletekkel.
+ * Lehetővé teszi elemek hozzáadását, eltávolítását és elemek predikátum alapján történő rendezését.
+ * A tömb az alsó index operátor segítségével érhető el.
+ *
+ * @tparam T A tömbben tárolt elemek típusa.
+ */
 template <typename T>
 class Array
 {
+    // Mutató a tömbre.
     T *arr = nullptr;
+    // A tömb mérete.
     size_t len = 0;
 
 public:
+    /**
+     * @brief Default konstruktor.
+     */
     Array();
+
+    /**
+     * @brief Másoló konstruktor.
+     * 
+     * @param a A másolandó tömb.
+     */
     Array(const Array &a);
+
+    /**
+     * @brief Destructor.
+     */
     virtual ~Array();
 
+    /**
+     * @brief Tömb méretének lekérdezése.
+     * 
+     * @return A tömb mérete.
+     */
     size_t size() const;
 
+    /**
+     * @brief Hozzáad egy elemet a tömbhöz.
+     * 
+     * @param el Az elem, amelyet hozzá kell adni.
+     */
     void pushBack(const T &el);
+
+    /**
+     * @brief Eltávolít egy elemet a tömbből az index helyén.
+     * 
+     * @param index Az eltávolítandó elem indexe.
+     */
     void removeEl(size_t index);
+
+    /**
+     * @brief Rendezés a tömb elemeinek egy predikátum alapján.
+     * 
+     * @tparam P A rendezéshez használt predikátum típusa.
+     * @param pred A rendezéshez használt predikátum.
+     */
     template <typename P>
     void orderBy(P pred);
 
+    /**
+     * @brief Tömb értékadása.
+     * 
+     * @param rhs A másolandó tömb.
+     * @return Az új tömb.
+     */
     Array &operator=(const Array &rhs);
+
+    /**
+     * @brief A tömb egy elemének elérése az index operátor használatával.
+     *
+     * @param index Az elérendő elem indexe.
+     * @return Referencia az elért elemre.
+     */
     T &operator[](size_t index);
+
+    /**
+     * @brief A tömb egy állandó elemének elérése az index operátor használatával.
+     *
+     * @param index Az elérendő elem indexe.
+     * @return Konstans referencia az elért elemre.
+     */
     const T &operator[](size_t index) const;
 };
 
