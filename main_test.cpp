@@ -259,6 +259,15 @@ int main()
         }
         END
 
+        TEST(Array, CopyConstruct)
+        {
+            Array<int> arr;
+            arr.pushBack(5);
+            const Array<int> constArr(arr);
+            EXPECT_EQ(5, constArr[0]);
+        }
+        END
+
         TEST(Array, ConstSize)
         {
             Array<int> arr;
