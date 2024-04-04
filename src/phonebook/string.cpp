@@ -78,6 +78,14 @@ const char &String::operator[](unsigned int index) const
     return str[index];
 }
 
+bool String::operator<(const String& rhs) const {
+    return std::strcmp(str, rhs.str) < 0;
+}
+
+bool String::operator==(const String& rhs) const {
+    return std::strcmp(str, rhs.str) == 0;
+}
+
 std::ostream &operator<<(std::ostream &os, const String &s)
 {
     os << s.c_str();

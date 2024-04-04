@@ -1,6 +1,8 @@
 #ifndef PHONEBOOK_STRING_H
 #define PHONEBOOK_STRING_H
 
+#include <cstring>
+
 /**
  * @class String
  * @brief Egy karakterláncot képviselő osztály.
@@ -10,9 +12,9 @@
 class String
 {
     // Karakter láncot tároló pointer
-    char *str;
+    char *str = nullptr;
     // Karakter lánc hossza
-    size_t len;
+    size_t len = 0;
 
 public:
     /**
@@ -95,6 +97,10 @@ public:
      * @return Konstans referencia a megadott indexben lévő karakterre.
      */
     const char &operator[](unsigned int index) const;
+
+    bool operator<(const String& rhs) const;
+
+    bool operator==(const String& rhs) const;
 
     /**
      * @brief Túlterheli a << operátort, hogy lehetővé tegye egy String objektum nyomtatását a kimeneti adatfolyamba.
