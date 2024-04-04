@@ -98,8 +98,24 @@ public:
      */
     const char &operator[](unsigned int index) const;
 
+    /**
+     * @brief Operátor két String objektum összehasonlítása.
+     *
+     * Ez a függvény összehasonlítja az aktuális String objektumot az "rhs" String objektummal
+     * és igaz értéket ad vissza, ha az aktuális objektum lexikográfiailag kisebb, mint "rhs",
+     * és egyébként hamis.
+     *
+     * @param rhs Az összehasonlítandó String objektum.
+     * @return Igaz, ha az aktuális objektum kisebb, mint `rhs`, ellenkező esetben false.
+     */
     bool operator<(const String& rhs) const;
 
+    /**
+     * @brief Ellenőrzi, hogy az aktuális karakterlánc egyenlő-e az adott karakterlánccal.
+     *
+     * @param rhs Az összehasonlítandó karakterlánc.
+     * @return Igaz, ha a karakterláncok egyenlőek, hamis egyébként.
+     */
     bool operator==(const String& rhs) const;
 
     /**
