@@ -294,6 +294,33 @@ int main()
            EXPECT_THROW(arr[0][0][0][0][0],std::out_of_range &);
         }
         END
+
+        TEST(Array,ArrayInArrayInArrayInArrayInArrayInArrayInArray) {
+            Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>>>>>>>> arr;
+            arr.pushBack(Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>>>>>>>());
+            arr[0].pushBack(Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>>>>>>());
+            arr[0][0].pushBack(Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>>>>>());
+            arr[0][0][0].pushBack(Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>>>>());
+            arr[0][0][0][0].pushBack(Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>>>());
+            arr[0][0][0][0][0].pushBack(Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>>());
+            arr[0][0][0][0][0][0].pushBack(Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>());
+            arr[0][0][0][0][0][0][0].pushBack(Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>());
+            arr[0][0][0][0][0][0][0][0].pushBack(Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>());
+            arr[0][0][0][0][0][0][0][0][0].pushBack(Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>());
+            arr[0][0][0][0][0][0][0][0][0][0].pushBack(Array<Array<Array<Array<Array<Array<Array<String>>>>>>>());
+            arr[0][0][0][0][0][0][0][0][0][0][0].pushBack(Array<Array<Array<Array<Array<Array<String>>>>>>());
+            arr[0][0][0][0][0][0][0][0][0][0][0][0].pushBack(Array<Array<Array<Array<Array<String>>>>>());
+            arr[0][0][0][0][0][0][0][0][0][0][0][0][0].pushBack(Array<Array<Array<Array<String>>>>());
+            arr[0][0][0][0][0][0][0][0][0][0][0][0][0][0].pushBack(Array<Array<Array<String>>>());
+            arr[0][0][0][0][0][0][0][0][0][0][0][0][0][0][0].pushBack(Array<Array<String>>());
+            arr[0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0].pushBack(Array<String>());
+            arr[0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0].pushBack(String("HELLO WORLD !"));
+            EXPECT_STREQ("HELLO WORLD !",arr[0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0].c_str());
+            arr.removeEl(0);
+            EXPECT_THROW(arr[0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0],std::out_of_range &);
+        }
+        END
+        
     }
 
     return gtest_lite::Test::getTest().failed >= 1;
