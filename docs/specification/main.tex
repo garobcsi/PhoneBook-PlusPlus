@@ -1,0 +1,88 @@
+\documentclass[11pt, letterpaper, openany, oneside]{book}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{sectsty}
+\usepackage{titlesec}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{t1enc}
+\usepackage{paralist}
+\usepackage[hungarian]{babel}
+
+
+\title{\textbf{Telefonykönv Specifikáció}}
+\author{\LARGE Gáspár Róbert \vspace{4px} \\ K8FD5S}
+\date{\today}
+
+\hypersetup{
+    colorlinks,
+    linktoc=all,
+    linkcolor={blue},
+    citecolor={blue},
+    urlcolor={blue}
+}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Feladat}
+
+\section{Célkitűzés}
+
+A program C++ nyelven íródjon meg, és Linux operációs rendszeren fordítható legyen. A program legyen modularizált, azaz külön modulokra bontottan készüljön el, hogy ezeket külön-külön is használni lehessen. A modulok legyenek újrafelhasználhatók más projektjeinkben vagy más fejlesztők által írt programokban. A programkód legyen jól strukturált és dokumentált, hogy könnyen megérthető legyen más fejlesztők számára is.
+
+\section{Funkcionális követelmények}
+
+A modulok legyenek Unit tesztjei, amelyek a modulok működését leteszteli. A programnak legyen egy egyszerű, könnyen kezelhető felhasználói felülete, amelyen keresztül a Telefonykönv működését demonstrálhatjuk. Ez egy müködö program, amelyben a fejlesztők a telefonkönyv funkcionalitását tudják leteszteli terminálos alkalmazásként.
+
+\section{Tiltások a funkcionális követelményhez}
+A megoldáshoz ne használjon STL tárolót:
+
+Az adatok tárolásához és kezeléséhez ne használjon STL tárolókat, helyette saját adatstruktúrákat és kezelőmetódusokat kell létrehozni.
+
+\chapter{Feladatspecifikáció}
+
+\section{Telefonykönv tartakma}
+A telefonkönyvben kezdetben az alábbi adatokat akarjuk tárolni:
+\vspace{5px}
+\begin{compactitem}
+    \item Név (vezetéknév, keresztnév)
+    \item Becenév
+    \item Cím
+    \item Munkahelyi szám
+    \item Privát szám
+\end{compactitem}
+
+\section{Telefonykönv műveletek}
+Az alkalmazással minimum a következő műveleteket kívánjuk elvégezni (CRUD):
+
+\vspace{5px}
+\begin{compactitem}
+    \item Adatok felvétele
+    \item Adatok módosítása
+    \item Adatok törlése
+    \item Listázás
+\end{compactitem}
+
+\section{Keresési lehetőségek}
+A legyen lehetőség keresni a telefonkönyvben szereplő névjegyek között. 
+
+\newpage
+
+\section{Importálás és exportálás}
+A telefonkönyv modulnak támogatnia kell az adatok importálását és exportálását, például CSV formátumban. A modulnak ebböl a fileból kell betöltenie a névjegyeket, és ezt a filet kell frissítenie a módosítások után.
+
+\section{Felhasználói felület}
+A felhasználói felület csak a fejlesztők számára elérhető és használható, kivéve speciális esetekben, például tesztelés vagy demonstráció céljából.
+
+\section{Adatok harmadik féllel való megosztása}
+Az alkalmazásnak tilos az adatok harmadik féllel való megosztása vagy külső szolgáltatásokhoz való kapcsolódása az adatvédelem vagy biztonság megőrzése érdekében.
+
+\end{document}
