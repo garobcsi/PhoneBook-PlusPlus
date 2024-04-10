@@ -13,7 +13,6 @@
 \usepackage{paralist}
 \usepackage[hungarian]{babel}
 
-
 \title{\textbf{Telefonykönv Specifikáció}}
 \author{\LARGE Gáspár Róbert \vspace{4px} \\ K8FD5S}
 \date{\today}
@@ -40,17 +39,16 @@ A program C++ nyelven íródjon meg, és Linux operációs rendszeren fordíthat
 
 \section{Funkcionális követelmények}
 
-A moduloknak legyenek Unit tesztjei, amelyek a modulok működését leteszteli. A programnak legyen egy egyszerű, könnyen kezelhető felhasználói felülete, amelyen keresztül a Telefonykönv működését demonstrálhatjuk. Ez egy müködö program, amelyben a fejlesztők a telefonkönyv funkcionalitását tudják leteszteli terminálos alkalmazásként.
+A moduloknak legyenek Unit tesztjei, amelyek a modulok működését letesztelik. A programnak legyen egy egyszerű, könnyen kezelhető felhasználói felülete, amelyen keresztül a Telefonykönv működését demonstrálhatjuk. Ez egy müködő program, amelyben a fejlesztők a telefonkönyv funkcionalitását tudják leteszteli terminálos alkalmazásként.
 
 \section{Tiltások a funkcionális követelményhez}
-A megoldáshoz ne használjon STL tárolót:
 
 Az adatok tárolásához és kezeléséhez ne használjon STL tárolókat, helyette saját adatstruktúrákat és kezelőmetódusokat kell létrehozni.
 
 \chapter{Feladatspecifikáció}
 
-\section{Telefonykönv tartakma}
-A telefonkönyvben kezdetben az alábbi adatokat akarjuk tárolni:
+\section{Telefonykönv tartalma}
+A telefonkönyvben az alábbi adatokat tároljuk:
 \vspace{5px}
 \begin{compactitem}
     \item Név (vezetéknév, keresztnév)
@@ -61,7 +59,7 @@ A telefonkönyvben kezdetben az alábbi adatokat akarjuk tárolni:
 \end{compactitem}
 
 \section{Telefonykönv műveletek}
-Az alkalmazással minimum a következő műveleteket kívánjuk elvégezni (CRUD):
+Az alkalmazással minimum a következő műveleteket végezhetjük el (CRUD):
 
 \vspace{5px}
 \begin{compactitem}
@@ -72,12 +70,12 @@ Az alkalmazással minimum a következő műveleteket kívánjuk elvégezni (CRUD
 \end{compactitem}
 
 \section{Keresési lehetőségek}
-A legyen lehetőség keresni a telefonkönyvben szereplő névjegyek között. 
+Keresési lehetőséget biztosítunk a telefonkönyvben szereplő névjegyek között.
 
 \newpage
 
 \section{Importálás és exportálás}
-A telefonkönyv modulnak támogatnia kell az adatok importálását és exportálását, például CSV formátumban. A modulnak ebböl a fileból kell betöltenie a névjegyeket, és ezt a filet kell frissítenie a módosítások után.
+A telefonkönyv modulnak támogatnia kell az adatok importálását és exportálását, például CSV formátumban. A modulnak ebből a fájlból kell betöltenie a névjegyeket, és ezt a fájlt kell frissítenie a módosítások után.
 
 \section{Felhasználói felület}
 A felhasználói felület csak a fejlesztők számára elérhető és használható, kivéve speciális esetekben, például tesztelés vagy demonstráció céljából.
