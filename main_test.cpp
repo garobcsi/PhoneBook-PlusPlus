@@ -9,6 +9,14 @@ int main()
     {
         TEST(String, DefaultConstructorTest)
         {
+            String s;
+            EXPECT_STREQ("", s.c_str());
+            EXPECT_EQ((size_t)0, s.size());
+        }
+        END
+
+        TEST(String, CharConstructorTest)
+        {
             String s('a');
             EXPECT_EQ((size_t)1, s.size());
             EXPECT_STREQ("a", s.c_str());
