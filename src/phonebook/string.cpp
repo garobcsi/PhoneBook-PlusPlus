@@ -1,7 +1,6 @@
+#include "../lib/memtrace.h"
 #include <iostream>
 #include <cstring>
-
-#include "../lib/memtrace.h"
 #include "./string.h"
 
 String::String(char c) : str(new char[2]), len(1)

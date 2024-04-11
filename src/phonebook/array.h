@@ -1,8 +1,10 @@
 #ifndef PHONEBOOK_ARRAY_H
 #define PHONEBOOK_ARRAY_H
 
+#include "../lib/memtrace.h"
 #include <cstring>
 #include <algorithm>
+#include <stdexcept>
 
 /**
  * @brief Dinamikus tömb osztálysablon.
@@ -29,10 +31,19 @@ public:
 
     /**
      * @brief Másoló konstruktor.
-     * 
+     *
      * @param a A másolandó tömb.
      */
     Array(const Array &a);
+
+    /**
+     * @brief Egy Array objektumot hoz létre a megadott inicializáló lista elemeivel.
+     *
+     * Ez a konstruktor inicializál egy Array objektumot a megadott inicializáló lista elemeivel.
+     *
+     * @param lista Az inicializáló lista, amely a tömbbe másolandó elemeket tartalmazza.
+     */
+    Array(std::initializer_list<T> list);
 
     /**
      * @brief Destructor.
@@ -41,28 +52,28 @@ public:
 
     /**
      * @brief Tömb méretének lekérdezése.
-     * 
+     *
      * @return A tömb mérete.
      */
     size_t size() const;
 
     /**
      * @brief Hozzáad egy elemet a tömbhöz.
-     * 
+     *
      * @param el Az elem, amelyet hozzá kell adni.
      */
     void pushBack(const T &el);
 
     /**
      * @brief Eltávolít egy elemet a tömbből az index helyén.
-     * 
+     *
      * @param index Az eltávolítandó elem indexe.
      */
     void removeEl(size_t index);
 
     /**
      * @brief Rendezés a tömb elemeinek egy predikátum alapján.
-     * 
+     *
      * @tparam P A rendezéshez használt predikátum típusa.
      * @param pred A rendezéshez használt predikátum.
      */
@@ -71,7 +82,7 @@ public:
 
     /**
      * @brief Tömb értékadása.
-     * 
+     *
      * @param rhs A másolandó tömb.
      * @return Az új tömb.
      */
@@ -103,6 +114,14 @@ Array<T>::Array(const Array &a)
     len = a.len;
     arr = new T[len];
     std::copy(a.arr, a.arr + len, arr);
+}
+
+template <typename T>
+Array<T>::Array(std::initializer_list<T> list)
+{
+    len = list.size();
+    arr = new T[len];
+    std::copy(list.begin(), list.end(), arr);
 }
 
 template <typename T>

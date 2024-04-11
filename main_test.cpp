@@ -151,7 +151,8 @@ int main()
         }
         END
 
-        TEST(String, OperatorLessThan) {
+        TEST(String, OperatorLessThan)
+        {
             String s1("apple");
             String s2("banana");
 
@@ -160,7 +161,8 @@ int main()
         }
         END
 
-        TEST(String, OperatorEquals) {
+        TEST(String, OperatorEquals)
+        {
             String s1("apple");
             String s2("apple");
             String s3("banana");
@@ -170,7 +172,8 @@ int main()
         }
         END
 
-        TEST(String, MixedComparisons) {
+        TEST(String, MixedComparisons)
+        {
             String s1("apple");
             String s2("banana");
 
@@ -277,25 +280,27 @@ int main()
         }
         END
 
-        TEST(Array,ArrayInArray) {
-           Array<Array<Array<Array<Array<String>>>>> arr;
-           arr.pushBack(Array<Array<Array<Array<String>>>>());
-           arr[0].pushBack(Array<Array<Array<String>>>());
-           arr[0][0].pushBack(Array<Array<String>>());
-           arr[0][0][0].pushBack(Array<String>());
-           arr[0][0][0][0].pushBack(String("world"));
-           arr[0][0][0][0].pushBack(String("Hello"));
-           EXPECT_STREQ("world", arr[0][0][0][0][0].c_str());
-           EXPECT_STREQ("Hello", arr[0][0][0][0][1].c_str());
-           arr[0][0][0][0].orderBy(std::less<String>());
-           EXPECT_STREQ("Hello", arr[0][0][0][0][0].c_str());
-           EXPECT_STREQ("world", arr[0][0][0][0][1].c_str());
-           arr.removeEl(0);
-           EXPECT_THROW(arr[0][0][0][0][0],std::out_of_range &);
+        TEST(Array, ArrayInArray)
+        {
+            Array<Array<Array<Array<Array<String>>>>> arr;
+            arr.pushBack(Array<Array<Array<Array<String>>>>());
+            arr[0].pushBack(Array<Array<Array<String>>>());
+            arr[0][0].pushBack(Array<Array<String>>());
+            arr[0][0][0].pushBack(Array<String>());
+            arr[0][0][0][0].pushBack(String("world"));
+            arr[0][0][0][0].pushBack(String("Hello"));
+            EXPECT_STREQ("world", arr[0][0][0][0][0].c_str());
+            EXPECT_STREQ("Hello", arr[0][0][0][0][1].c_str());
+            arr[0][0][0][0].orderBy(std::less<String>());
+            EXPECT_STREQ("Hello", arr[0][0][0][0][0].c_str());
+            EXPECT_STREQ("world", arr[0][0][0][0][1].c_str());
+            arr.removeEl(0);
+            EXPECT_THROW(arr[0][0][0][0][0], std::out_of_range &);
         }
         END
 
-        TEST(Array,ArrayInArrayInArrayInArrayInArrayInArrayInArray) {
+        TEST(Array, ArrayInArrayInArrayInArrayInArrayInArrayInArray)
+        {
             Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>>>>>>>> arr;
             arr.pushBack(Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>>>>>>>());
             arr[0].pushBack(Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>>>>>>());
@@ -315,12 +320,39 @@ int main()
             arr[0][0][0][0][0][0][0][0][0][0][0][0][0][0][0].pushBack(Array<Array<String>>());
             arr[0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0].pushBack(Array<String>());
             arr[0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0].pushBack(String("HELLO WORLD !"));
-            EXPECT_STREQ("HELLO WORLD !",arr[0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0].c_str());
+            EXPECT_STREQ("HELLO WORLD !", arr[0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0].c_str());
             arr.removeEl(0);
-            EXPECT_THROW(arr[0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0],std::out_of_range &);
+            EXPECT_THROW(arr[0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0][0], std::out_of_range &);
         }
         END
-        
+
+        TEST(Array, initializer_list<int>)
+        {
+            Array<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
+            for (int i = 0; i < (int)arr.size(); ++i)
+            {
+                EXPECT_EQ(i + 1, arr[i]);
+            }
+        }
+        END
+
+        TEST(Array, initializer_list<String>)
+        {
+            Array<String> arr = {(String) "a", (String) "b", (String) "c", (String) "d", (String) "e", (String) "f", (String) "g", (String) "h"};
+            EXPECT_STREQ("a", arr[0].c_str());
+            EXPECT_STREQ("b", arr[1].c_str());
+            EXPECT_STREQ("c", arr[2].c_str());
+            EXPECT_STREQ("d", arr[3].c_str());
+            EXPECT_STREQ("e", arr[4].c_str());
+            EXPECT_STREQ("f", arr[5].c_str());
+            EXPECT_STREQ("g", arr[6].c_str());
+            EXPECT_STREQ("h", arr[7].c_str());
+            arr.removeEl(0);
+            EXPECT_THROW(arr[7].c_str(), std::out_of_range &);
+            EXPECT_STREQ("b", arr[0].c_str());
+            EXPECT_STREQ("h", arr[6].c_str());
+        }
+        END
     }
 
     return gtest_lite::Test::getTest().failed >= 1;

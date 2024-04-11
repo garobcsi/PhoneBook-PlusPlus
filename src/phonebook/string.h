@@ -1,7 +1,8 @@
 #ifndef PHONEBOOK_STRING_H
 #define PHONEBOOK_STRING_H
 
-#include <cstring>
+#include "../lib/memtrace.h"
+#include <iostream>
 
 /**
  * @class String
