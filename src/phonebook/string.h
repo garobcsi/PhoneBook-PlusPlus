@@ -109,7 +109,7 @@ public:
      * @param rhs Az összehasonlítandó String objektum.
      * @return Igaz, ha az aktuális objektum kisebb, mint `rhs`, ellenkező esetben false.
      */
-    bool operator<(const String& rhs) const;
+    bool operator<(const String &rhs) const;
 
     /**
      * @brief Ellenőrzi, hogy az aktuális karakterlánc egyenlő-e az adott karakterlánccal.
@@ -117,7 +117,7 @@ public:
      * @param rhs Az összehasonlítandó karakterlánc.
      * @return Igaz, ha a karakterláncok egyenlőek, hamis egyébként.
      */
-    bool operator==(const String& rhs) const;
+    bool operator==(const String &rhs) const;
 
     /**
      * @brief Túlterheli a << operátort, hogy lehetővé tegye egy String objektum nyomtatását a kimeneti adatfolyamba.

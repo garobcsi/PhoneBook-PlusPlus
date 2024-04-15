@@ -77,11 +77,13 @@ const char &String::operator[](unsigned int index) const
     return str[index];
 }
 
-bool String::operator<(const String& rhs) const {
+bool String::operator<(const String &rhs) const
+{
     return std::strcmp(str, rhs.str) < 0;
 }
 
-bool String::operator==(const String& rhs) const {
+bool String::operator==(const String &rhs) const
+{
     return std::strcmp(str, rhs.str) == 0;
 }
 
