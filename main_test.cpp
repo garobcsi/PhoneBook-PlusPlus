@@ -346,7 +346,7 @@ int main()
 
         TEST(Array, initializer_list<String>)
         {
-            Array<String> arr = {(String) "a", (String) "b", (String) "c", (String) "d", (String) "e", (String) "f", (String) "g", (String) "h"};
+            Array<String> arr = {"a",  "b",  "c",  "d",  "e",  "f",  "g",  "h"};
             EXPECT_STREQ("a", arr[0].c_str());
             EXPECT_STREQ("b", arr[1].c_str());
             EXPECT_STREQ("c", arr[2].c_str());

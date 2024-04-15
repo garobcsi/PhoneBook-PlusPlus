@@ -32,7 +32,7 @@ public:
      *
      * @param p Karaktertömbre mutató pointer.
      */
-    explicit String(const char *p = "");
+    String(const char *p = "");
 
     /**
      * @brief Új String objektumot hoz létre egy másik String objektum másolásával.
