@@ -346,7 +346,7 @@ int main()
 
         TEST(Array, initializer_list<String>)
         {
-            Array<String> arr = {"a",  "b",  "c",  "d",  "e",  "f",  "g",  "h"};
+            Array<String> arr = {"a", "b", "c", "d", "e", "f", "g", "h"};
             EXPECT_STREQ("a", arr[0].c_str());
             EXPECT_STREQ("b", arr[1].c_str());
             EXPECT_STREQ("c", arr[2].c_str());
@@ -361,6 +361,65 @@ int main()
             EXPECT_STREQ("h", arr[6].c_str());
         }
         END
+
+        /*ARRAY ITERATOR CLASS TESTS*/
+        {
+            TEST(ArrayIteratorTest, IteratorTest)
+            {
+
+                Array<int> arr = {1, 2, 3};
+
+                Array<int>::Iterator it = arr.begin();
+                EXPECT_EQ(1, *it);
+
+                ++it;
+                EXPECT_EQ(2, *it);
+
+                it++;
+                EXPECT_EQ(3, *it);
+
+                ++it;
+                EXPECT_TRUE(it == arr.end());
+
+                const Array<int> &constArr = arr;
+                Array<int>::Iterator cit = constArr.begin();
+                EXPECT_EQ(1, *cit);
+
+                ++cit;
+                EXPECT_EQ(2, *cit);
+
+                cit++;
+                EXPECT_EQ(3, *cit);
+
+                ++cit;
+                EXPECT_TRUE(cit == constArr.end());
+            }
+            END
+
+            TEST(ArrayIteratorTest, ForLoop1)
+            {
+                Array<int> arr = {1, 2, 3};
+                int count = 0;
+                for (auto i : arr)
+                {
+                    count++;
+                    EXPECT_EQ(count, i);
+                }
+            }
+            END
+
+            TEST(ArrayIteratorTest, ForLoop2)
+            {
+                Array<int> arr = {1, 2, 3};
+                int count = 0;
+                for (auto i = arr.begin(); i != arr.end(); i++)
+                {
+                    count++;
+                    EXPECT_EQ(count, *i);
+                }
+            }
+            END
+        }
     }
 
     return gtest_lite::Test::getTest().failed >= 1;

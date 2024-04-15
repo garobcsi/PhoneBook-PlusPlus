@@ -103,6 +103,22 @@ public:
      * @return Konstans referencia az elért elemre.
      */
     const T &operator[](size_t index) const;
+
+    class Iterator
+    {
+        T *ptr;
+
+    public:
+        Iterator(T *p);
+        T &operator*() const;
+        Iterator &operator++();
+        Iterator operator++(int);
+        bool operator==(const Iterator &other) const;
+        bool operator!=(const Iterator &other) const;
+    };
+
+    Iterator begin() const;
+    Iterator end() const;
 };
 
 template <typename T>
@@ -198,6 +214,54 @@ const T &Array<T>::operator[](size_t index) const
         throw std::out_of_range("Array: out of range");
     }
     return arr[index];
+}
+
+template <typename T>
+Array<T>::Iterator::Iterator(T *p) : ptr(p) {}
+
+template <typename T>
+T &Array<T>::Iterator::operator*() const
+{
+    return *ptr;
+}
+
+template <typename T>
+typename Array<T>::Iterator &Array<T>::Iterator::operator++()
+{
+    ++ptr;
+    return *this;
+}
+
+template <typename T>
+typename Array<T>::Iterator Array<T>::Iterator::operator++(int)
+{
+    Iterator tmp = *this;
+    ++ptr;
+    return tmp;
+}
+
+template <typename T>
+bool Array<T>::Iterator::operator==(const Array::Iterator &other) const
+{
+    return ptr == other.ptr;
+}
+
+template <typename T>
+bool Array<T>::Iterator::operator!=(const Array::Iterator &other) const
+{
+    return ptr != other.ptr;
+}
+
+template <typename T>
+typename Array<T>::Iterator Array<T>::begin() const
+{
+    return Iterator(arr);
+}
+
+template <typename T>
+typename Array<T>::Iterator Array<T>::end() const
+{
+    return Iterator(arr + len);
 }
 
 #endif // PHONEBOOK_ARRAY_H
