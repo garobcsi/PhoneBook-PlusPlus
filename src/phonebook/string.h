@@ -3,6 +3,7 @@
 
 #include "../lib/memtrace.h"
 #include <iostream>
+#include "./array.h"
 
 /**
  * @class String
@@ -61,6 +62,8 @@ public:
      * @return Vissza adja a karakterláncot.
      */
     const char *c_str() const;
+
+    Array<String> split(char c);
 
     /**
      * @brief Másoló értékadás operátor.

@@ -203,6 +203,32 @@ int main()
         }
         END
 
+        TEST(String, Split)
+        {
+            String str = ";a;b;hello world;";
+            Array<String> arr = str.split(';');
+
+            EXPECT_STREQ("", arr[0].c_str());
+            EXPECT_STREQ("a", arr[1].c_str());
+            EXPECT_STREQ("b", arr[2].c_str());
+            EXPECT_STREQ("hello world", arr[3].c_str());
+            EXPECT_STREQ("", arr[4].c_str());
+            EXPECT_THROW(arr[5], std::out_of_range &);
+        }
+        END
+
+        TEST(String, Split2)
+        {
+            String str = "a;b;hello world";
+            Array<String> arr = str.split(';');
+
+            EXPECT_STREQ("a", arr[0].c_str());
+            EXPECT_STREQ("b", arr[1].c_str());
+            EXPECT_STREQ("hello world", arr[2].c_str());
+            EXPECT_THROW(arr[3], std::out_of_range &);
+        }
+        END
+
         /*STRING ITERATOR CLASS TESTS*/
         {
             TEST(StringIteratorTest, BeginAndEnd)
@@ -271,8 +297,9 @@ int main()
             {
                 String s = "hello world";
                 int count = 0;
-                for (auto i = s.begin(); i != s.end(); i++) {
-                    EXPECT_EQ(s[count],*i);
+                for (auto i = s.begin(); i != s.end(); i++)
+                {
+                    EXPECT_EQ(s[count], *i);
                     count++;
                 }
             }
@@ -282,8 +309,9 @@ int main()
             {
                 String s = "hello world";
                 int count = (int)s.size();
-                for (auto i = s.rbegin(); i != s.rend(); i--) {
-                    EXPECT_EQ(s[count-1],*i);
+                for (auto i = s.rbegin(); i != s.rend(); i--)
+                {
+                    EXPECT_EQ(s[count - 1], *i);
                     count--;
                 }
             }

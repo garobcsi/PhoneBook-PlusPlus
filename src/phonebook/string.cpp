@@ -34,6 +34,24 @@ const char *String::c_str() const
     return str;
 }
 
+Array<String> String::split(char c)
+{
+    Array<String> tmp;
+    String s = "";
+    for (size_t i = 0; i < size(); ++i)
+    {
+        if (str[i] == c)
+        {
+            tmp.pushBack(s);
+            s = "";
+            continue;
+        }
+        s = s + str[i];
+    }
+    tmp.pushBack(s);
+    return tmp;
+}
+
 String &String::operator=(const String &rhs)
 {
     if (this != &rhs)
@@ -126,52 +144,63 @@ String operator+(char lhs, const String &rhs)
 
 String::Iterator::Iterator(char *p) : ptr(p) {}
 
-String::Iterator &String::Iterator::operator++() {
+String::Iterator &String::Iterator::operator++()
+{
     ++ptr;
     return *this;
 }
 
-String::Iterator String::Iterator::operator++(int) {
+String::Iterator String::Iterator::operator++(int)
+{
     Iterator temp = *this;
     ++ptr;
     return temp;
 }
 
-String::Iterator &String::Iterator::operator--() {
+String::Iterator &String::Iterator::operator--()
+{
     --ptr;
     return *this;
 }
 
-String::Iterator String::Iterator::operator--(int) {
+String::Iterator String::Iterator::operator--(int)
+{
     Iterator temp = *this;
     --ptr;
     return temp;
 }
 
-char String::Iterator::operator*() const {
+char String::Iterator::operator*() const
+{
     return *ptr;
 }
 
-bool String::Iterator::operator==(const String::Iterator &other) const {
+bool String::Iterator::operator==(const String::Iterator &other) const
+{
     return ptr == other.ptr;
 }
 
-bool String::Iterator::operator!=(const String::Iterator &other) const {
+bool String::Iterator::operator!=(const String::Iterator &other) const
+{
     return ptr != other.ptr;
 }
 
-String::Iterator String::begin() const {
+String::Iterator String::begin() const
+{
     return {str};
 }
 
-String::Iterator String::end() const {
-    return {str +len};
+String::Iterator String::end() const
+{
+    return {str + len};
 }
 
-String::Iterator String::rbegin()const {
-    return {str + len -1};
+String::Iterator String::rbegin() const
+{
+    return {str + len - 1};
 }
 
-String::Iterator String::rend()const {
-    return {str -1};
+String::Iterator String::rend() const
+{
+    return {str - 1};
 }
