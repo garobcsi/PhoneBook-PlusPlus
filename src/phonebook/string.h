@@ -147,6 +147,102 @@ public:
      * @return Az összefűzés eredményeként létrejövő új String objektum.
      */
     friend String operator+(char lhs, const String &rhs);
+
+    /**
+     * @class Iterator
+     * @brief Iterátor osztály a String osztályhoz.
+     */
+    class Iterator
+    {
+        char *ptr;
+
+    public:
+        /**
+         * @brief Konstruktor az iterátorhoz.
+         *
+         * @param p A string egy elemére mutató mutató.
+         */
+        Iterator(char *p);
+
+        /**
+         * @brief Előrelépés a következő karakterre.
+         *
+         * @return Iterator& Referencia az iterátorra.
+         */
+        Iterator &operator++();
+
+        /**
+         * @brief Előrelépés a következő karakterre (utólagos).
+         *
+         * @return Iterator& Referencia az iterátorra.
+         */
+        Iterator operator++(int);
+
+        /**
+         * @brief Hátralépés a elöző karakterre.
+         *
+         * @return Iterator& Referencia az iterátorra.
+         */
+        Iterator &operator--();
+
+        /**
+         * @brief Hátralépés a elöző karakterre (utólagos).
+         *
+         * @return Iterator& Referencia az iterátorra.
+         */
+        Iterator operator--(int);
+
+        /**
+         * @brief Az iterátor által mutatott karakter elérése.
+         *
+         * @return char A mutatott karakter.
+         */
+        char operator*() const;
+
+        /**
+         * @brief Az iterátorok összehasonlítása.
+         *
+         * @param other A másik iterátor, amivel összehasonlítjuk.
+         * @return bool Igaz, ha az iterátorok ugyanarra a karakterre mutatnak, egyébként hamis.
+         */
+        bool operator==(const Iterator &other) const;
+
+        /**
+         * @brief Az iterátorok összehasonlítása.
+         *
+         * @param other A másik iterátor, amivel összehasonlítjuk.
+         * @return bool Hamis, ha az iterátorok ugyanarra a karakterre mutatnak, egyébként igaz.
+         */
+        bool operator!=(const Iterator &other) const;
+    };
+
+    /**
+     * @brief Iterátor a karakterlánc elejéhez.
+     *
+     * @return Pointer az első karakterre.
+     */
+    Iterator begin() const;
+
+    /**
+     * @brief Iterátor a karakterlánc végéhez.
+     *
+     * @return Pointer a karakterlánc utáni területre.
+     */
+    Iterator end() const;
+
+    /**
+     * @brief Fordított iterátor a karakterlánc végéhez.
+     *
+     * @return Fordított iterátor a karakterlánc végéhez.
+     */
+    Iterator rbegin() const;
+
+    /**
+     * @brief Fordított iterátor a karakterlánc elejéhez.
+     *
+     * @return Fordított iterátor a karakterlánc elejéhez.
+     */
+    Iterator rend() const;
 };
 
 #endif // PHONEBOOK_STRING_H

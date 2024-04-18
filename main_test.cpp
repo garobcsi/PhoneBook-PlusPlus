@@ -189,6 +189,93 @@ int main()
             EXPECT_FALSE(s1 == s2);
         }
         END
+
+        /*STRING ITERATOR CLASS TESTS*/
+        {
+            TEST(StringIteratorTest, BeginAndEnd)
+            {
+                String s("hello");
+                String::Iterator it = s.begin();
+                EXPECT_EQ('h', *it);
+
+                it = s.end();
+                EXPECT_NE('o', *it);
+            }
+            END
+
+            TEST(StringIteratorTest, ReverseBeginAndEnd)
+            {
+                String s("hello");
+                String::Iterator it = s.rbegin();
+                EXPECT_EQ('o', *it);
+
+                it = s.rend();
+                EXPECT_NE('h', *it);
+            }
+            END
+
+            TEST(StringIteratorTest, IncrementAndDecrement)
+            {
+                String s("hello");
+                String::Iterator it = s.begin();
+
+                ++it;
+                EXPECT_EQ('e', *it);
+
+                --it;
+                EXPECT_EQ('h', *it);
+            }
+            END
+
+            TEST(StringIteratorTest, EqualityAndInequality)
+            {
+                String s("hello");
+                String::Iterator it1 = s.begin();
+                String::Iterator it2 = s.begin();
+                String::Iterator it3 = s.end();
+
+                EXPECT_TRUE(it1 == it2);
+                EXPECT_FALSE(it1 != it2);
+
+                EXPECT_FALSE(it1 == it3);
+                EXPECT_TRUE(it1 != it3);
+            }
+            END
+
+            TEST(StringIteratorTest, ForLoop1)
+            {
+                String s = "hello world";
+                int count = 0;
+                for (char i : s)
+                {
+                    EXPECT_EQ(s[count], i);
+                    count++;
+                }
+            }
+            END
+
+            TEST(StringIteratorTest, ForLoop2)
+            {
+                String s = "hello world";
+                int count = 0;
+                for (auto i = s.begin(); i != s.end(); i++) {
+                    EXPECT_EQ(s[count],*i);
+                    count++;
+                }
+            }
+            END
+
+            TEST(StringIteratorTest, ForLoop3)
+            {
+                String s = "hello world";
+                int count = (int)s.size();
+                for (auto i = s.rbegin(); i != s.rend(); i--) {
+                    EXPECT_EQ(s[count-1],*i);
+                    count--;
+                }
+            }
+            END
+        }
     }
 
     /* ARRAY CLASS TESTS */
@@ -362,6 +449,19 @@ int main()
         }
         END
 
+        TEST(Array, where)
+        {
+            Array<String> arr = {"ab", "ac", "ad", "d", "e", "af", "g", "h"};
+            arr.where([](String el)
+                      { return el[0] == 'a'; });
+            EXPECT_STREQ("ab", arr[0].c_str());
+            EXPECT_STREQ("ac", arr[1].c_str());
+            EXPECT_STREQ("ad", arr[2].c_str());
+            EXPECT_STREQ("af", arr[3].c_str());
+            EXPECT_THROW(arr[4].c_str(), std::out_of_range &);
+        }
+        END
+
         /*ARRAY ITERATOR CLASS TESTS*/
         {
             TEST(ArrayIteratorTest, IteratorTest)
@@ -416,6 +516,18 @@ int main()
                 {
                     count++;
                     EXPECT_EQ(count, *i);
+                }
+            }
+            END
+
+            TEST(ArrayIteratorTest, ForLoop3)
+            {
+                Array<int> arr = {1, 2, 3};
+                int count = 3;
+                for (auto i = arr.rbegin(); i != arr.rend(); i--)
+                {
+                    EXPECT_EQ(count, *i);
+                    count--;
                 }
             }
             END

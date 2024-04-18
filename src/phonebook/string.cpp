@@ -118,3 +118,55 @@ String operator+(char lhs, const String &rhs)
 {
     return String(lhs) + rhs;
 }
+
+String::Iterator::Iterator(char *p) : ptr(p) {}
+
+String::Iterator &String::Iterator::operator++() {
+    ++ptr;
+    return *this;
+}
+
+String::Iterator String::Iterator::operator++(int) {
+    Iterator temp = *this;
+    ++ptr;
+    return temp;
+}
+
+String::Iterator &String::Iterator::operator--() {
+    --ptr;
+    return *this;
+}
+
+String::Iterator String::Iterator::operator--(int) {
+    Iterator temp = *this;
+    --ptr;
+    return temp;
+}
+
+char String::Iterator::operator*() const {
+    return *ptr;
+}
+
+bool String::Iterator::operator==(const String::Iterator &other) const {
+    return ptr == other.ptr;
+}
+
+bool String::Iterator::operator!=(const String::Iterator &other) const {
+    return ptr != other.ptr;
+}
+
+String::Iterator String::begin() const {
+    return {str};
+}
+
+String::Iterator String::end() const {
+    return {str +len};
+}
+
+String::Iterator String::rbegin()const {
+    return {str + len -1};
+}
+
+String::Iterator String::rend()const {
+    return {str -1};
+}
