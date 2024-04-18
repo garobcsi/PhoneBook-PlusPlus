@@ -63,6 +63,12 @@ public:
      */
     const char *c_str() const;
 
+    /**
+     * A karakterláncot részkarakterláncok tömbjére osztja fel a megadott határoló karakter alapján.
+     *
+     * @param c A karakterlánc felosztására használt határoló karakter.
+     * @return Az alsztringeket reprezentáló String objektumok tömbje.
+     */
     Array<String> split(char c);
 
     /**
