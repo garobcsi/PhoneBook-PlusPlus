@@ -66,7 +66,7 @@ public:
 
     /**
      * @brief Eltávolít egy elemet a tömbből az index helyén.
-     *
+     * @throw std::out_of_range Tulindexelés esetén.
      * @param index Az eltávolítandó elem indexe.
      */
     void removeEl(size_t index);
@@ -81,6 +81,14 @@ public:
     void orderBy(P pred);
 
     /**
+     * Szűri a tömb elemeit az adott predikátum alapján.
+     *
+     * @param pred A predikátum függvény, amely meghatározza, hogy egy elem szerepeljen-e a szűrt tömbben.
+     */
+    template <typename P>
+    void where(P pred);
+
+    /**
      * @brief Tömb értékadása.
      *
      * @param rhs A másolandó tömb.
@@ -90,7 +98,7 @@ public:
 
     /**
      * @brief A tömb egy elemének elérése az index operátor használatával.
-     *
+     * @throw std::out_of_range Tulindexelés esetén.
      * @param index Az elérendő elem indexe.
      * @return Referencia az elért elemre.
      */
@@ -98,27 +106,114 @@ public:
 
     /**
      * @brief A tömb egy állandó elemének elérése az index operátor használatával.
-     *
+     * @throw std::out_of_range Tulindexelés esetén.
      * @param index Az elérendő elem indexe.
      * @return Konstans referencia az elért elemre.
      */
     const T &operator[](size_t index) const;
 
+    /**
+     * @brief A tömb osztály iterátora.
+     *
+     * Egy iterátort használunk a tömb elemeinek bejárására.
+     * Különféle operátorokat biztosít a növeléséhez, csökkentéséhez és az iterátorok összehasonlításához.
+     *
+     * @tparam T A tömb elemeinek típusa.
+     */
     class Iterator
     {
         T *ptr;
 
     public:
+        /**
+         * @brief Egy iterátort készít egy adott mutatóval.
+         *
+         * @param p A tömb egy elemére mutató mutató.
+         */
         Iterator(T *p);
+
+        /**
+         * @return Hivatkozás arra az elemre, amelyre az iterátor mutat.
+         */
         T &operator*() const;
+
+        /**
+         * @brief Növeli az iterátort, hogy a tömb következő elemére mutasson.
+         *
+         * @return Hivatkozás a növekményes iterátorra.
+         */
         Iterator &operator++();
+
+        /**
+         * @brief Növeli az iterátort, hogy a tömb következő elemére mutasson.
+         *
+         * @return Az iterátor másolata a növelés előtt.
+         */
         Iterator operator++(int);
+
+        /**
+         * @brief Csökkenti az iterátort, hogy a tömb előző elemére mutasson.
+         *
+         * @return Hivatkozás a csökkentett iterátorra.
+         */
+        Iterator &operator--();
+
+        /**
+         * @brief Csökkenti az iterátort, hogy a tömb előző elemére mutasson.
+         *
+         * @return Az iterátor másolata a csökkentés előtt.
+         */
+        Iterator operator--(int);
+
+        /**
+         * @brief Összehasonlítja az iterátort egy másik iterátorral az egyenlőség érdekében.
+         *
+         * @param other Az iterátor, amellyel összehasonlítani lehet.
+         * @return true, ha az iterátorok egyenlőek, hamis ellenkező esetben.
+         */
         bool operator==(const Iterator &other) const;
+
+        /**
+         * @brief Összehasonlítja az iterátort egy másik iterátorral az egyenlőtlenség szempontjából.
+         *
+         * @param other Az iterátor, amellyel összehasonlítani lehet.
+         * @return true, ha az iterátorok nem egyenlőek, hamis ellenkező esetben.
+         */
         bool operator!=(const Iterator &other) const;
     };
 
+    /**
+     * @brief Egy iterátor osztály a tömb elemei iterációhoz.
+     *
+     * Tömb elejétöl kezdve iterál.
+     *
+     * @return Az iterátor, amely a tömb elejére mutat.
+     */
     Iterator begin() const;
+    /**
+     * @brief Egy iterátor osztály a tömb elemei iterációhoz.
+     *
+     * Tömb itelálásnál végét jelzi.
+     *
+     * @return Az iterátor, amely a tömb végére mutat.
+     */
     Iterator end() const;
+    /**
+     * @brief Egy iterátor osztály a tömb elemei iterációhoz.
+     *
+     * Tömb végétöl kezdve iterál.
+     *
+     * @return Az iterátor, amely a tömb végére mutat.
+     */
+    Iterator rbegin() const;
+    /**
+     * @brief Egy iterátor osztály a tömb elemei iterációhoz.
+     *
+     * Tömb itelálásnál elejének a végét jelzi.
+     *
+     * @return Az iterátor, amely a tömb elejére mutat.
+     */
+    Iterator rend() const;
 };
 
 template <typename T>
@@ -184,6 +279,20 @@ void Array<T>::orderBy(P pred)
 }
 
 template <typename T>
+template <typename P>
+void Array<T>::where(P pred)
+{
+    for (size_t i = 0; i < len; ++i)
+    {
+        if (!pred(arr[i]))
+        {
+            removeEl(i);
+            i--;
+        };
+    }
+}
+
+template <typename T>
 Array<T> &Array<T>::operator=(const Array &rhs)
 {
     if (this != &rhs)
@@ -241,6 +350,21 @@ typename Array<T>::Iterator Array<T>::Iterator::operator++(int)
 }
 
 template <typename T>
+typename Array<T>::Iterator &Array<T>::Iterator::operator--()
+{
+    --ptr;
+    return *this;
+}
+
+template <typename T>
+typename Array<T>::Iterator Array<T>::Iterator::operator--(int)
+{
+    Iterator tmp = *this;
+    --ptr;
+    return tmp;
+}
+
+template <typename T>
 bool Array<T>::Iterator::operator==(const Array::Iterator &other) const
 {
     return ptr == other.ptr;
@@ -260,6 +384,18 @@ typename Array<T>::Iterator Array<T>::begin() const
 
 template <typename T>
 typename Array<T>::Iterator Array<T>::end() const
+{
+    return Iterator(arr + len);
+}
+
+template <typename T>
+typename Array<T>::Iterator Array<T>::rbegin() const
+{
+    return Iterator(arr + len - 1);
+}
+
+template <typename T>
+typename Array<T>::Iterator Array<T>::rend() const
 {
     return Iterator(arr + len);
 }

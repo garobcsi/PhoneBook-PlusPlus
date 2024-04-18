@@ -85,7 +85,7 @@ public:
 
     /**
      * @brief Operátor a karakterlánc karaktereinek eléréséhez.
-     *
+     * @throw std::out_of_range Tulindexelés esetén.
      * @param index Az elérendő karakter indexe.
      * @return Referencia a megadott indexben lévő karakterre.
      */
@@ -93,7 +93,7 @@ public:
 
     /**
      * @brief Operátor konstans karakterlánc karaktereinek eléréséhez.
-     *
+     * @throw std::out_of_range Tulindexelés esetén.
      * @param index Az elérendő karakter indexe.
      * @return Konstans referencia a megadott indexben lévő karakterre.
      */
