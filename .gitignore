@@ -2,6 +2,7 @@
 .cmake/
 cmake-build*/
 saves/
+.vscode/
 
 # CREDIT: https://github.com/kigster/cmake-project-template/blob/master/.gitignore
 
