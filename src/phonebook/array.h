@@ -397,7 +397,7 @@ typename Array<T>::Iterator Array<T>::rbegin() const
 template <typename T>
 typename Array<T>::Iterator Array<T>::rend() const
 {
-    return Iterator(arr + len);
+    return Iterator(arr - 1);
 }
 
 #endif // PHONEBOOK_ARRAY_H
