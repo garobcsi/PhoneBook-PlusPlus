@@ -97,12 +97,17 @@ std::istream &operator>>(std::istream &is, String &s)
 {
     unsigned char ch;
     s = String("");
+
     std::ios_base::fmtflags fl = is.flags();
-    is.setf(std::ios_base::skipws);
+    bool skipwsFlag = (fl & std::ios_base::skipws) != 0;
+
+    if (skipwsFlag)
+        is.setf(std::ios_base::skipws);
     while (is >> ch)
     {
-        is.unsetf(std::ios_base::skipws);
-        if (isspace(ch))
+        if (skipwsFlag)
+            is.unsetf(std::ios_base::skipws);
+        if (isspace(ch) && skipwsFlag)
         {
             is.putback(ch);
             break;

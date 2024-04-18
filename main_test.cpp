@@ -140,12 +140,25 @@ int main()
         {
             String s;
             std::stringstream ss("hello                 world");
+            ss >> std::noskipws;
+            ss >> std::skipws;
             ss >> s;
             EXPECT_EQ((size_t)5, s.size());
             EXPECT_STREQ("hello", s.c_str());
             ss >> s;
             EXPECT_EQ((size_t)5, s.size());
             EXPECT_STREQ("world", s.c_str());
+        }
+        END
+
+        TEST(String, InputTestWhitespaces(std::noskipws))
+        {
+            String s;
+            std::stringstream ss("hello                 world");
+            ss >> std::noskipws;
+            ss >> s;
+            EXPECT_EQ((size_t)27, s.size());
+            EXPECT_STREQ("hello                 world", s.c_str());
         }
         END
 

@@ -132,6 +132,8 @@ public:
      * @brief Túlterhelt bemeneti adatfolyam-kivonási operátor a String osztályhoz.
      *
      * Ez a funkció lehetővé teszi, hogy kinyerjen egy String objektumot egy bemeneti adatfolyamból.
+     * 
+     * Ha std::noskipws állapotban van a bemeneti adatfolyam, akkor a funkció beolvassa az egész string et whitespace el.
      *
      * @param is A bemeneti adatfolyam.
      * @param s A String objektum az érték tárolására.
