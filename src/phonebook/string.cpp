@@ -125,6 +125,7 @@ std::istream &operator>>(std::istream &is, String &s)
     {
         if (skipwsFlag)
             is.unsetf(std::ios_base::skipws);
+        if (ch == '\n' && !skipwsFlag) break;
         if (isspace(ch) && skipwsFlag)
         {
             is.putback(ch);

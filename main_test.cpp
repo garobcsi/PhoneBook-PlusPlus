@@ -161,6 +161,22 @@ int main()
             EXPECT_STREQ("hello                 world", s.c_str());
         }
         END
+        TEST(String, InputTestWhitespaces(std::noskipws) 2)
+        {
+            String s;
+            std::stringstream ss("hello                 world\nnew line");
+            ss >> std::noskipws;
+            ss >> s;
+            EXPECT_EQ((size_t)27, s.size());
+            EXPECT_STREQ("hello                 world", s.c_str());
+            ss >> s;
+            EXPECT_EQ((size_t)8, s.size());
+            EXPECT_STREQ("new line", s.c_str());
+            Array<String> arr = s.split(' ');
+            EXPECT_STREQ("new",arr[0].c_str());
+            EXPECT_STREQ("line",arr[1].c_str());
+        }
+        END
 
         TEST(String, PlusOperatorCharLeftTest)
         {
