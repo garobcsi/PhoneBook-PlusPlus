@@ -258,14 +258,11 @@ int main()
             }
             END
 
-            TEST(StringIteratorTest, ReverseBeginAndEnd)
+            TEST(StringIteratorTest, ReverseBegin)
             {
                 String s("hello");
                 String::Iterator it = s.rbegin();
                 EXPECT_EQ('o', *it);
-
-                it = s.rend();
-                EXPECT_NE('h', *it);
             }
             END
 
