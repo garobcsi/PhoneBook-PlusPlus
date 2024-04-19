@@ -41,7 +41,7 @@ public:
      *
      * Ez a konstruktor inicializál egy Array objektumot a megadott inicializáló lista elemeivel.
      *
-     * @param lista Az inicializáló lista, amely a tömbbe másolandó elemeket tartalmazza.
+     * @param list Az inicializáló lista, amely a tömbbe másolandó elemeket tartalmazza.
      */
     Array(std::initializer_list<T> list);
 
@@ -81,8 +81,9 @@ public:
     void orderBy(P pred);
 
     /**
-     * Szűri a tömb elemeit az adott predikátum alapján.
+     * @brief Szűri a tömb elemeit az adott predikátum alapján.
      *
+     * @tparam P A predikátum függvény típusa.
      * @param pred A predikátum függvény, amely meghatározza, hogy egy elem szerepeljen-e a szűrt tömbben.
      */
     template <typename P>
@@ -117,8 +118,6 @@ public:
      *
      * Egy iterátort használunk a tömb elemeinek bejárására.
      * Különféle operátorokat biztosít a növeléséhez, csökkentéséhez és az iterátorok összehasonlításához.
-     *
-     * @tparam T A tömb elemeinek típusa.
      */
     class Iterator
     {
@@ -190,6 +189,7 @@ public:
      * @return Az iterátor, amely a tömb elejére mutat.
      */
     Iterator begin() const;
+
     /**
      * @brief Egy iterátor osztály a tömb elemei iterációhoz.
      *
@@ -198,6 +198,7 @@ public:
      * @return Az iterátor, amely a tömb végére mutat.
      */
     Iterator end() const;
+
     /**
      * @brief Egy iterátor osztály a tömb elemei iterációhoz.
      *
@@ -206,6 +207,7 @@ public:
      * @return Az iterátor, amely a tömb végére mutat.
      */
     Iterator rbegin() const;
+
     /**
      * @brief Egy iterátor osztály a tömb elemei iterációhoz.
      *
