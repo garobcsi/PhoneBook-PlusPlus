@@ -3,6 +3,7 @@
 #include "src/phonebook/string.h"
 #include "src/phonebook/array.h"
 #include "src/phonebook/contact.h"
+#include "src/phonebook/contacts.h"
 
 int main()
 {
@@ -708,7 +709,41 @@ int main()
 
     /*CONTACTS CLASS TESTS*/
     {
-        
+        TEST(ContactsTest, DefaultConstructor)
+        {
+            Contacts contacts;
+            EXPECT_EQ((size_t)0, contacts.size());
+        }
+        END
+
+        TEST(ContactsTest, ParameterizedConstructor)
+        {
+            Contact contact1("John", "Doe", "JD", "123 Main St","+361234567890", "069876543210");
+            Contact contact2("Alice", "Smith", "AS", "456 Elm St", "+361234567890", "069876543210");
+
+            Contacts contacts = {contact1, contact2};
+
+            EXPECT_EQ((size_t)2, contacts.size());
+        }
+        END
+
+        TEST(ContactsTest, FileIO)
+        {
+
+            const String file = "test_file.csv";
+            Contact c1 = {"Alice", "Smith", "AS", "456 Elm St", "+361234567890", "069876543210"};
+            Contact c2 = {"John", "Doe", "JD", "123 Main St","+361234567890", "069876543210"};
+            Contacts co = {c1,c2};
+            co.saveFile(file);
+
+            Contacts con;
+            con.loadFile(file);
+
+            EXPECT_EQ(c1,con[0]);
+            EXPECT_EQ(c2,con[1]);
+            EXPECT_THROW(con[2],std::out_of_range &);
+        }
+        END
     }
 
     return gtest_lite::Test::getTest().failed >= 1;
