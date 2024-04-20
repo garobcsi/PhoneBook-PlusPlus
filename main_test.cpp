@@ -597,6 +597,15 @@ int main()
                 }
             }
             END
+
+            TEST(Array, clear)
+            {
+                Array<int> arr = {1, 2, 4, 5, 6};
+                arr.clear();
+                EXPECT_EQ((size_t)0, arr.size());
+                EXPECT_THROW(arr[0], std::out_of_range &);
+            }
+            END
         }
     }
 
@@ -718,7 +727,7 @@ int main()
 
         TEST(ContactsTest, ParameterizedConstructor)
         {
-            Contact contact1("John", "Doe", "JD", "123 Main St","+361234567890", "069876543210");
+            Contact contact1("John", "Doe", "JD", "123 Main St", "+361234567890", "069876543210");
             Contact contact2("Alice", "Smith", "AS", "456 Elm St", "+361234567890", "069876543210");
 
             Contacts contacts = {contact1, contact2};
@@ -732,16 +741,16 @@ int main()
 
             const String file = "test_file.csv";
             Contact c1 = {"Alice", "Smith", "AS", "456 Elm St", "+361234567890", "069876543210"};
-            Contact c2 = {"John", "Doe", "JD", "123 Main St","+361234567890", "069876543210"};
-            Contacts co = {c1,c2};
+            Contact c2 = {"John", "Doe", "JD", "123 Main St", "+361234567890", "069876543210"};
+            Contacts co = {c1, c2};
             co.saveFile(file);
 
             Contacts con;
             con.loadFile(file);
 
-            EXPECT_EQ(c1,con[0]);
-            EXPECT_EQ(c2,con[1]);
-            EXPECT_THROW(con[2],std::out_of_range &);
+            EXPECT_EQ(c1, con[0]);
+            EXPECT_EQ(c2, con[1]);
+            EXPECT_THROW(con[2], std::out_of_range &);
         }
         END
     }

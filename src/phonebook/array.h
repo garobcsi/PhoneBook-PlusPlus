@@ -90,6 +90,12 @@ public:
     template <typename P>
     Array<T> where(P pred);
 
+    /**
+     * @brief Törli a tömb tartalmát és felszabadítja az általa foglalt memóriaterületet.
+     *
+     * Ez a függvény eltávolítja az összes elemet a tömbből, és felszabadítja az általa foglalt memóriaterületet.
+     * A tömb ezután üres lesz, és új elemeket lehet hozzáadni a memória újrahasznosításával.
+     */
     void clear();
 
     /**
@@ -299,9 +305,10 @@ Array<T> Array<T>::where(P pred)
     return tmp;
 }
 
-template<typename T>
-void Array<T>::clear() {
-    delete []arr;
+template <typename T>
+void Array<T>::clear()
+{
+    delete[] arr;
     arr = nullptr;
     len = 0;
 }
