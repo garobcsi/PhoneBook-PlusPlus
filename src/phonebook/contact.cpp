@@ -106,7 +106,8 @@ void Contact::setPrivateNumber(const String &privateNumber)
         throw std::invalid_argument("Contact: not a phone number");
 }
 
-bool Contact::operator==(const Contact &rhs) const {
+bool Contact::operator==(const Contact &rhs) const
+{
     return (_firstName == rhs._firstName &&
             _lastName == rhs._lastName &&
             _nickname == rhs._nickname &&
@@ -115,7 +116,8 @@ bool Contact::operator==(const Contact &rhs) const {
             _privateNumber == rhs._privateNumber);
 }
 
-bool Contact::operator!=(const Contact &rhs) const {
+bool Contact::operator!=(const Contact &rhs) const
+{
     return !(*this == rhs);
 }
 
