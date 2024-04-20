@@ -90,6 +90,8 @@ public:
     template <typename P>
     Array<T> where(P pred);
 
+    void clear();
+
     /**
      * @brief Tömb értékadása.
      *
@@ -295,6 +297,13 @@ Array<T> Array<T>::where(P pred)
         }
     }
     return tmp;
+}
+
+template<typename T>
+void Array<T>::clear() {
+    delete []arr;
+    arr = nullptr;
+    len = 0;
 }
 
 template <typename T>
