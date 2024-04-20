@@ -221,6 +221,15 @@ int main()
         }
         END
 
+        TEST(String, NotEqual)
+        {
+            String s1("apple");
+            String s2("banana");
+
+            EXPECT_TRUE(s1 != s2);
+        }
+        END
+
         TEST(String, Split)
         {
             String str = ";a;b;hello world;";
@@ -715,7 +724,8 @@ int main()
         }
         END
 
-        TEST(ContactTest,== !=) {
+        TEST(ContactTest, == !=)
+        {
             Contact c1 = {"Alice", "Smith", "AS", "456 Elm St", "+361234567890", "069876543210"};
             Contact c2 = {"John", "Doe", "JD", "123 Main St", "+361234567890", "069876543210"};
             Contact c3 = {"Alice", "Smith", "AS", "456 Elm St", "+361234567890", "069876543210"};

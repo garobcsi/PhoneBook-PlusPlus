@@ -125,6 +125,12 @@ public:
      */
     bool operator==(const String &rhs) const;
 
+    /**
+     * @brief Az operátor ellenőrzi, hogy két String objektum nem egyenlő-e.
+     *
+     * @param rhs Az összehasonlítandó String objektum.
+     * @return Hamis, ha a két String objektum megegyezik, egyébként igaz.
+     */
     bool operator!=(const String &rhs) const;
 
     /**
