@@ -125,6 +125,8 @@ public:
      */
     bool operator==(const String &rhs) const;
 
+    bool operator!=(const String &rhs) const;
+
     /**
      * @brief Túlterhelt << operátor egy String objektum kiírására.
      *
