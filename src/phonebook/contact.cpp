@@ -106,6 +106,19 @@ void Contact::setPrivateNumber(const String &privateNumber)
         throw std::invalid_argument("Contact: not a phone number");
 }
 
+bool Contact::operator==(const Contact &rhs) const {
+    return (_firstName == rhs._firstName &&
+            _lastName == rhs._lastName &&
+            _nickname == rhs._nickname &&
+            _address == rhs._address &&
+            _workNumber == rhs._workNumber &&
+            _privateNumber == rhs._privateNumber);
+}
+
+bool Contact::operator!=(const Contact &rhs) const {
+    return !(*this == rhs);
+}
+
 std::ostream &operator<<(std::ostream &os, const Contact &c)
 {
     os << c.getFirstName().c_str() << ";" << c.getLastName().c_str() << ";" << c.getNickname().c_str() << ";" << c.getAddress().c_str() << ";" << c.getWorkNumber().c_str() << ";" << c.getPrivateNumber().c_str();

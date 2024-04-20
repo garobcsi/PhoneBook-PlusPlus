@@ -138,6 +138,11 @@ public:
      */
     void setPrivateNumber(const String &privateNumber);
 
+
+    bool operator==(const Contact &rhs) const;
+
+    bool operator!=(const Contact &rhs) const;
+
     /**
      * @brief Kimenetként formázza a kapcsolatot. (csv formátumba)
      *
