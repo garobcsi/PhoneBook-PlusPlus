@@ -3,7 +3,7 @@ option(MEMTRACE "ENABLE Memtrace" ON)
 option(WALL "ENABLE Wall Werror Wdeprecated pedantic " ON)
 option(DEBUGGER "ENABLE Debugger" ON)
 
-option(TEST "OVERRIDE/RUN UNIT TESTS (it will disable main program from running)" ON)
+option(TEST "OVERRIDE/RUN UNIT TESTS (it will disable main program from running)" OFF)
 #OPTIONS END
 
 cmake_minimum_required(VERSION 3.27)
