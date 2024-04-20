@@ -506,13 +506,24 @@ int main()
         TEST(Array, where)
         {
             Array<String> arr = {"ab", "ac", "ad", "d", "e", "af", "g", "h"};
-            arr.where([](String el)
+            Array<String> arr_where = arr.where([](String el)
                       { return el[0] == 'a'; });
-            EXPECT_STREQ("ab", arr[0].c_str());
-            EXPECT_STREQ("ac", arr[1].c_str());
-            EXPECT_STREQ("ad", arr[2].c_str());
-            EXPECT_STREQ("af", arr[3].c_str());
-            EXPECT_THROW(arr[4].c_str(), std::out_of_range &);
+            EXPECT_STREQ("ab", arr_where[0].c_str());
+            EXPECT_STREQ("ac", arr_where[1].c_str());
+            EXPECT_STREQ("ad", arr_where[2].c_str());
+            EXPECT_STREQ("af", arr_where[3].c_str());
+            EXPECT_THROW(arr_where[4].c_str(), std::out_of_range &);
+
+            EXPECT_STREQ("ab",arr[0].c_str());
+            EXPECT_STREQ("ac",arr[1].c_str());
+            EXPECT_STREQ("ad",arr[2].c_str());
+            EXPECT_STREQ("d",arr[3].c_str());
+            EXPECT_STREQ("e",arr[4].c_str());
+            EXPECT_STREQ("af",arr[5].c_str());
+            EXPECT_STREQ("g",arr[6].c_str());
+            EXPECT_STREQ("h",arr[7].c_str());
+            EXPECT_THROW(arr[8].c_str(), std::out_of_range &);
+
         }
         END
 
