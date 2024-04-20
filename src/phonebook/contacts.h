@@ -28,6 +28,8 @@ public:
      */
     Contacts(std::initializer_list<Contact> list);
 
+    Contacts &operator=(const Contacts &rhs);
+
     /**
      * @brief Betölti a kapcsolatokat egy fájlból.
      * 
