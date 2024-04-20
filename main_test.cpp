@@ -2,6 +2,7 @@
 #include "src/lib/gtest_lite.h"
 #include "src/phonebook/string.h"
 #include "src/phonebook/array.h"
+#include "src/phonebook/contact.h"
 
 int main()
 {
@@ -173,8 +174,8 @@ int main()
             EXPECT_EQ((size_t)8, s.size());
             EXPECT_STREQ("new line", s.c_str());
             Array<String> arr = s.split(' ');
-            EXPECT_STREQ("new",arr[0].c_str());
-            EXPECT_STREQ("line",arr[1].c_str());
+            EXPECT_STREQ("new", arr[0].c_str());
+            EXPECT_STREQ("line", arr[1].c_str());
         }
         END
 
@@ -507,23 +508,22 @@ int main()
         {
             Array<String> arr = {"ab", "ac", "ad", "d", "e", "af", "g", "h"};
             Array<String> arr_where = arr.where([](String el)
-                      { return el[0] == 'a'; });
+                                                { return el[0] == 'a'; });
             EXPECT_STREQ("ab", arr_where[0].c_str());
             EXPECT_STREQ("ac", arr_where[1].c_str());
             EXPECT_STREQ("ad", arr_where[2].c_str());
             EXPECT_STREQ("af", arr_where[3].c_str());
             EXPECT_THROW(arr_where[4].c_str(), std::out_of_range &);
 
-            EXPECT_STREQ("ab",arr[0].c_str());
-            EXPECT_STREQ("ac",arr[1].c_str());
-            EXPECT_STREQ("ad",arr[2].c_str());
-            EXPECT_STREQ("d",arr[3].c_str());
-            EXPECT_STREQ("e",arr[4].c_str());
-            EXPECT_STREQ("af",arr[5].c_str());
-            EXPECT_STREQ("g",arr[6].c_str());
-            EXPECT_STREQ("h",arr[7].c_str());
+            EXPECT_STREQ("ab", arr[0].c_str());
+            EXPECT_STREQ("ac", arr[1].c_str());
+            EXPECT_STREQ("ad", arr[2].c_str());
+            EXPECT_STREQ("d", arr[3].c_str());
+            EXPECT_STREQ("e", arr[4].c_str());
+            EXPECT_STREQ("af", arr[5].c_str());
+            EXPECT_STREQ("g", arr[6].c_str());
+            EXPECT_STREQ("h", arr[7].c_str());
             EXPECT_THROW(arr[8].c_str(), std::out_of_range &);
-
         }
         END
 
@@ -597,6 +597,118 @@ int main()
             }
             END
         }
+    }
+
+    /*CONTACT CLASS TESTS*/
+    {
+        TEST(ContactTest, DefaultConstructor)
+        {
+            Contact contact;
+            EXPECT_STREQ("", contact.getFirstName().c_str());
+            EXPECT_STREQ("", contact.getLastName().c_str());
+            EXPECT_STREQ("", contact.getNickname().c_str());
+            EXPECT_STREQ("", contact.getAddress().c_str());
+            EXPECT_STREQ("", contact.getWorkNumber().c_str());
+            EXPECT_STREQ("", contact.getPrivateNumber().c_str());
+        }
+        END
+
+        TEST(ContactTest, ParameterizedConstructor)
+        {
+            Contact contact("John", "Doe", "JD", "123 Main St", "+363452345", "06707654321");
+            EXPECT_STREQ("John", contact.getFirstName().c_str());
+            EXPECT_STREQ("Doe", contact.getLastName().c_str());
+            EXPECT_STREQ("JD", contact.getNickname().c_str());
+            EXPECT_STREQ("123 Main St", contact.getAddress().c_str());
+            EXPECT_STREQ("+363452345", contact.getWorkNumber().c_str());
+            EXPECT_STREQ("06707654321", contact.getPrivateNumber().c_str());
+        }
+        END
+
+        TEST(ContactTest, CopyConstructor)
+        {
+            Contact contact1("John", "Doe", "JD", "123 Main St", "+363452345", "06707654321");
+            const Contact &contact2(contact1);
+            EXPECT_EQ(contact1.getFirstName(), contact2.getFirstName());
+            EXPECT_EQ(contact1.getLastName(), contact2.getLastName());
+            EXPECT_EQ(contact1.getNickname(), contact2.getNickname());
+            EXPECT_EQ(contact1.getAddress(), contact2.getAddress());
+            EXPECT_EQ(contact1.getWorkNumber(), contact2.getWorkNumber());
+            EXPECT_EQ(contact1.getPrivateNumber(), contact2.getPrivateNumber());
+        }
+        END
+
+        TEST(ContactTest, AssignmentOperator)
+        {
+            Contact contact1("John", "Doe", "JD", "123 Main St", "+361234567890", "069876543210");
+            Contact contact2;
+            contact2 = contact1;
+            EXPECT_EQ(contact1.getFirstName(), contact2.getFirstName());
+            EXPECT_EQ(contact1.getLastName(), contact2.getLastName());
+            EXPECT_EQ(contact1.getNickname(), contact2.getNickname());
+            EXPECT_EQ(contact1.getAddress(), contact2.getAddress());
+            EXPECT_EQ(contact1.getWorkNumber(), contact2.getWorkNumber());
+            EXPECT_EQ(contact1.getPrivateNumber(), contact2.getPrivateNumber());
+        }
+        END
+
+        TEST(ContactTest, SetFunctions)
+        {
+            Contact contact;
+            contact.setFirstName("John");
+            contact.setLastName("Doe");
+            contact.setNickname("JD");
+            contact.setAddress("123 Main St");
+            contact.setWorkNumber("+361234567890");
+            contact.setPrivateNumber("069876543210");
+
+            EXPECT_STREQ("John", contact.getFirstName().c_str());
+            EXPECT_STREQ("Doe", contact.getLastName().c_str());
+            EXPECT_STREQ("JD", contact.getNickname().c_str());
+            EXPECT_STREQ("123 Main St", contact.getAddress().c_str());
+            EXPECT_STREQ("+361234567890", contact.getWorkNumber().c_str());
+            EXPECT_STREQ("069876543210", contact.getPrivateNumber().c_str());
+        }
+        END
+
+        TEST(ContactTest, IsPhoneNumber)
+        {
+            Contact contact;
+            EXPECT_NO_THROW(contact.setPrivateNumber("+361234567890"));
+            EXPECT_NO_THROW(contact.setPrivateNumber("06301234567"));
+            EXPECT_THROW(contact.setPrivateNumber("123456789"), std::invalid_argument &);
+            EXPECT_THROW(contact.setPrivateNumber("12345678901"), std::invalid_argument &);
+            EXPECT_THROW(contact.setPrivateNumber("12345678A9"), std::invalid_argument &);
+        }
+        END
+
+        TEST(ContactTest, StreamInsertionOperator)
+        {
+            Contact contact("John", "Doe", "JD", "123 Main St", "+361234567890", "069876543210");
+            std::stringstream ss;
+            ss << contact;
+            EXPECT_STREQ("John;Doe;JD;123 Main St;+361234567890;069876543210", ss.str().c_str());
+        }
+        END
+
+        TEST(ContactTest, StreamExtractionOperator)
+        {
+            Contact contact;
+            std::stringstream ss("John;Doe;JD;123 Main St;+361234567890;069876543210");
+            ss >> contact;
+            EXPECT_STREQ("John", contact.getFirstName().c_str());
+            EXPECT_STREQ("Doe", contact.getLastName().c_str());
+            EXPECT_STREQ("JD", contact.getNickname().c_str());
+            EXPECT_STREQ("123 Main St", contact.getAddress().c_str());
+            EXPECT_STREQ("+361234567890", contact.getWorkNumber().c_str());
+            EXPECT_STREQ("069876543210", contact.getPrivateNumber().c_str());
+        }
+        END
+    }
+
+    /*CONTACTS CLASS TESTS*/
+    {
+        
     }
 
     return gtest_lite::Test::getTest().failed >= 1;

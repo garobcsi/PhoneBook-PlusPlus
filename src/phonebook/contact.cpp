@@ -7,6 +7,12 @@ Contact::Contact() : _firstName(""), _lastName(""), _nickname(""), _address(""),
 
 Contact::Contact(const Contact &c)
 {
+    setFirstName(c.getFirstName());
+    setLastName(c.getLastName());
+    setNickname(c.getNickname());
+    setAddress(c.getAddress());
+    setWorkNumber(c.getWorkNumber());
+    setPrivateNumber(c.getPrivateNumber());
 }
 
 Contact::Contact(const String &firstName, const String &lastName, const String &nickname, const String &address,
@@ -133,13 +139,13 @@ std::istream &operator>>(std::istream &is, Contact &c)
     return is;
 }
 
-bool Contact::isPhoneNumber(const String &str) const
+bool Contact::isPhoneNumber(const String &str)
 {
     /*
-     * https://regexper.com/#%5E%5C%2B%3F%28%3F%3A36%7C06%29%5B0-9%5D%7B8%2C%7D%24
+     * https://regexper.com/#%5E%5C%2B%3F%28%3F%3A36%7C06%29%5B0-9%5D%7B7%2C%7D%24
      * Elfogadott formátum: +301236479 vagy 06301236479
      */
-    std::regex phonePattern("^\\+?(?:36|06)[0-9]{8,}$");
+    std::regex phonePattern("^\\+?(?:36|06)[0-9]{7,}$");
 
     return std::regex_match(str.c_str(), phonePattern);
 }
