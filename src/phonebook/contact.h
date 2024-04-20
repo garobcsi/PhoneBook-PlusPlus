@@ -138,9 +138,24 @@ public:
      */
     void setPrivateNumber(const String &privateNumber);
 
-
+    /**
+     * @brief Ellenőrzi, hogy két kapcsolat egyenlő-e.
+     *
+     * Két kapcsolat akkor egyenlő, ha minden adattagjuk megegyezik.
+     *
+     * @param rhs Az összehasonlítandó kapcsolat.
+     * @return Igaz, ha a két kapcsolat egyenlő, egyébként hamis.
+     */
     bool operator==(const Contact &rhs) const;
 
+    /**
+     * @brief Ellenőrzi, hogy két kapcsolat nem egyenlő-e.
+     *
+     * Két kapcsolat akkor nem egyenlő, ha legalább egy adattagjuk eltér egymástól.
+     *
+     * @param rhs Az összehasonlítandó kapcsolat.
+     * @return Igaz, ha a két kapcsolat nem egyenlő, egyébként hamis.
+     */
     bool operator!=(const Contact &rhs) const;
 
     /**

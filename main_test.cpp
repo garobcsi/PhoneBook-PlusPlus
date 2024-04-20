@@ -714,6 +714,15 @@ int main()
             EXPECT_STREQ("069876543210", contact.getPrivateNumber().c_str());
         }
         END
+
+        TEST(ContactTest,== !=) {
+            Contact c1 = {"Alice", "Smith", "AS", "456 Elm St", "+361234567890", "069876543210"};
+            Contact c2 = {"John", "Doe", "JD", "123 Main St", "+361234567890", "069876543210"};
+            Contact c3 = {"Alice", "Smith", "AS", "456 Elm St", "+361234567890", "069876543210"};
+            EXPECT_TRUE(c1 != c2);
+            EXPECT_TRUE(c1 == c3);
+        }
+        END
     }
 
     /*CONTACTS CLASS TESTS*/
