@@ -13,9 +13,15 @@
  */
 class String
 {
-    // Karakter láncot tároló pointer
+    /**
+     * @brief Karakter láncot tároló pointer
+     * 
+     */
     char *str = nullptr;
-    // Karakter lánc hossza
+    /**
+     * @brief Karakter lánc hossza
+     * 
+     */
     size_t len = 0;
 
 public:
@@ -166,6 +172,10 @@ public:
      */
     class Iterator
     {
+        /**
+         * @brief A string egy karakterére mutató pointer
+         * 
+         */
         char *ptr;
 
     public:

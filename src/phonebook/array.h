@@ -7,6 +7,7 @@
 #include <stdexcept>
 
 /**
+ * @class Array
  * @brief Dinamikus tömb osztálysablon.
  *
  * Ez az osztály dinamikus tömb megvalósítást biztosít különféle műveletekkel.
@@ -18,9 +19,15 @@
 template <typename T>
 class Array
 {
-    // Mutató a tömbre.
+    /**
+     * @brief Mutató a tömbre.
+     * 
+     */
     T *arr = nullptr;
-    // A tömb mérete.
+    /**
+     * @brief A tömb mérete.
+     * 
+     */
     size_t len = 0;
 
 public:
@@ -130,6 +137,10 @@ public:
      */
     class Iterator
     {
+        /**
+         * @brief Tömb egyik elemére mutató pointer
+         * 
+         */
         T *ptr;
 
     public:

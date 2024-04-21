@@ -5,13 +5,43 @@
 #include "./string.h"
 #include "./array.h"
 
+/**
+ * @class Contact
+ * @brief Egy darab személnek a telefonszámát és adatait tárolja el.
+ *
+ * A Contact biztositani fogja hogy csakis jó értékek kerülhessenek a objectumba
+ */
 class Contact
 {
+    /**
+     * @brief Vezetéknevet tároló string objectum
+     *
+     */
     String _firstName = "";
+    /**
+     * @brief Utónevet tároló string objectum
+     *
+     */
     String _lastName = "";
+    /**
+     * @brief Becenevet tároló string objectum
+     *
+     */
     String _nickname = "";
+    /**
+     * @brief Címet tároló string objectum
+     * 
+     */
     String _address = "";
+    /**
+     * @brief Munka telefonszámot tároló string objectum
+     * 
+     */
     String _workNumber = "";
+    /**
+     * @brief Személyes telefonszámot tároló string objectum
+     * 
+     */
     String _privateNumber = "";
 
 public:

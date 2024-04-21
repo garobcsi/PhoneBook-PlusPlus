@@ -5,6 +5,13 @@
 #include "array.h"
 #include "contact.h"
 
+/**
+ * @class Contacts
+ * @brief Eltárolja az felhasználónak az összes ismeröseinek a telefonszámát
+ *
+ * Biztositani fog a CSV formátumú filek beolvasására és irására,
+ * adatok elérése, adatok modositása, adatok törlésére, és létrehozásra is.
+ */
 class Contacts : public Array<Contact>
 {
 
@@ -28,6 +35,12 @@ public:
      */
     Contacts(std::initializer_list<Contact> list);
 
+    /**
+     * @brief Másoló értékadás operátor
+     * 
+     * @param rhs Constans jobb oldali másolandó objectum
+     * @return Contacts& Másolt referenciát ad vissza.
+     */
     Contacts &operator=(const Contacts &rhs);
 
     /**
