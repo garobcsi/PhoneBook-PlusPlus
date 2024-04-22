@@ -35,5 +35,13 @@ if(DEBUGGER)
 endif(DEBUGGER)
 unset(DEBUGGER CACHE)
 
-add_subdirectory(src)
+target_sources(${PROJECT_NAME} PRIVATE
+        string.cpp string.h
+        array.h
+        contact.cpp contact.h
+        contacts.cpp contacts.h
+)
 
+target_sources(${PROJECT_NAME} PRIVATE
+        gtest_lite.h
+        memtrace.cpp memtrace.h)

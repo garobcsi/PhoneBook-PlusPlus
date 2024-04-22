@@ -1,7 +1,7 @@
 #ifndef PHONEBOOK_CONTACTS_H
 #define PHONEBOOK_CONTACTS_H
 
-#include "../lib/memtrace.h"
+#include "./memtrace.h"
 #include "array.h"
 #include "contact.h"
 

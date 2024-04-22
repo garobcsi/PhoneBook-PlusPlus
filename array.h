@@ -1,7 +1,7 @@
 #ifndef PHONEBOOK_ARRAY_H
 #define PHONEBOOK_ARRAY_H
 
-#include "../lib/memtrace.h"
+#include "./memtrace.h"
 #include <cstring>
 #include <algorithm>
 #include <stdexcept>

@@ -1,4 +1,4 @@
-#include "../lib/memtrace.h"
+#include "./memtrace.h"
 #include "contacts.h"
 #include <iostream>
 #include <fstream>

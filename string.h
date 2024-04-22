@@ -1,7 +1,7 @@
 #ifndef PHONEBOOK_STRING_H
 #define PHONEBOOK_STRING_H
 
-#include "../lib/memtrace.h"
+#include "./memtrace.h"
 #include <iostream>
 #include "./array.h"
 

@@ -1,9 +1,9 @@
-#include "src/lib/memtrace.h"
-#include "src/lib/gtest_lite.h"
-#include "src/phonebook/string.h"
-#include "src/phonebook/array.h"
-#include "src/phonebook/contact.h"
-#include "src/phonebook/contacts.h"
+#include "./memtrace.h"
+#include "./gtest_lite.h"
+#include "./string.h"
+#include "./array.h"
+#include "./contact.h"
+#include "./contacts.h"
 
 int main()
 {

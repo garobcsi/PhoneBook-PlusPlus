@@ -1,4 +1,4 @@
-#include "../lib/memtrace.h"
+#include "./memtrace.h"
 #include "contact.h"
 
 #include <regex>

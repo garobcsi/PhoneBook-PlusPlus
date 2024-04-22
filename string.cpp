@@ -1,4 +1,4 @@
-#include "../lib/memtrace.h"
+#include "./memtrace.h"
 #include <iostream>
 #include <cstring>
 #include "./string.h"
