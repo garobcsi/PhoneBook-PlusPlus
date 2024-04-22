@@ -1,4 +1,4 @@
-#include "src/lib/memtrace.h"
+#include "./memtrace.h"
 #include <iostream>
 
 int main()
