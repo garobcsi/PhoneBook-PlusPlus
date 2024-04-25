@@ -21,7 +21,6 @@ int main()
     Menu export_file;
     Menu import_file;
 
-
     mainMenu.Create([&]() {
         while (true) {
             Menu::Clear();

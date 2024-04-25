@@ -22,6 +22,7 @@ if (NOT TEST)
             SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/tabulate"
     )
     FetchContent_MakeAvailable(tabulate)
+    #TABLE LIB
     target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/tabulate/single_include/tabulate/tabulate.hpp )
 else ()
     enable_testing()
@@ -44,6 +45,7 @@ if(DEBUGGER)
 endif(DEBUGGER)
 unset(DEBUGGER CACHE)
 
+#PHONE BOOK
 target_sources(${PROJECT_NAME} PRIVATE
         string.cpp string.h
         array.h
@@ -51,6 +53,12 @@ target_sources(${PROJECT_NAME} PRIVATE
         contacts.cpp contacts.h
 )
 
+#TERMINAL
+target_sources(${PROJECT_NAME} PRIVATE
+        menu.cpp menu.h
+)
+
+#LIBS
 target_sources(${PROJECT_NAME} PRIVATE
         gtest_lite.h
         memtrace.cpp memtrace.h)
