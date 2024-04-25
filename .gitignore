@@ -3,6 +3,7 @@
 cmake-build*/
 saves/
 .vscode/
+tabulate
 
 # CREDIT: https://github.com/kigster/cmake-project-template/blob/master/.gitignore
 

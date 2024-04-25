@@ -14,6 +14,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(PhoneBook)
 if (NOT TEST)
     add_executable(${PROJECT_NAME} main.cpp)
+    include(FetchContent)
+    set(FETCHCONTENT_UPDATES_DISCONNECTED TRUE)
+    FetchContent_Declare(tabulate
+            GIT_REPOSITORY https://github.com/p-ranav/tabulate
+            GIT_TAG v1.5
+            SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/tabulate"
+    )
+    target_sources(${PROJECT_NAME} PRIVATE tabulate/single_include/tabulate/tabulate.hpp )
 else ()
     enable_testing()
     add_executable(${PROJECT_NAME} main_test.cpp)
