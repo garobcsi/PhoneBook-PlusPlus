@@ -24,7 +24,7 @@ int Menu::Render() {
     }
 }
 
-void Menu::Clear() {
+int Menu::Clear() {
 #if defined _WIN32
     int err = system("cls");
 #elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
@@ -32,4 +32,5 @@ void Menu::Clear() {
 #elif defined (__APPLE__)
     int err = system("clear");
 #endif
+    return err;
 }

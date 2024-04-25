@@ -15,7 +15,7 @@ public:
     void Create(F function);
     int Render();
 
-    static void Clear();
+    static int Clear();
 };
 
 template <typename F>
