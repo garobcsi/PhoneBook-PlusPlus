@@ -21,7 +21,8 @@ if (NOT TEST)
             GIT_TAG v1.5
             SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/tabulate"
     )
-    target_sources(${PROJECT_NAME} PRIVATE tabulate/single_include/tabulate/tabulate.hpp )
+    FetchContent_MakeAvailable(tabulate)
+    target_sources(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/tabulate/single_include/tabulate/tabulate.hpp )
 else ()
     enable_testing()
     add_executable(${PROJECT_NAME} main_test.cpp)
