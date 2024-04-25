@@ -24,7 +24,7 @@ void Contacts::loadFile(const String &fileName)
 {
     clear();
     std::ifstream file(fileName.c_str());
-
+    if (!file.good()) throw std::runtime_error("Contacts: Unable to open file!");
     Contact c;
     while (file >> c)
     {
@@ -36,6 +36,7 @@ void Contacts::loadFile(const String &fileName)
 void Contacts::saveFile(const String &fileName)
 {
     std::ofstream file(fileName.c_str());
+    if (!file.good()) throw std::runtime_error("Contacts: Unable to open file!");
     for (size_t i = 0; i < size(); ++i)
     {
         if (i != 0)
@@ -43,4 +44,9 @@ void Contacts::saveFile(const String &fileName)
         file << this->operator[](i);
     }
     file.close();
+}
+
+bool Contacts::fileExists(const String &file) {
+    std::ifstream f(file.c_str());
+    return f.good();
 }

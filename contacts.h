@@ -37,7 +37,7 @@ public:
 
     /**
      * @brief Másoló értékadás operátor
-     * 
+     *
      * @param rhs Constans jobb oldali másolandó objectum
      * @return Contacts& Másolt referenciát ad vissza.
      */
@@ -46,6 +46,7 @@ public:
     /**
      * @brief Betölti a kapcsolatokat egy fájlból.
      *
+     * @throw std::runtime_error a file nem nyitható meg
      * @param fileName A betöltendő fájl elérési útja.
      */
     void loadFile(const String &fileName);
@@ -53,9 +54,18 @@ public:
     /**
      * @brief Menti a kapcsolatokat egy fájlba.
      *
+     * @throw std::runtime_error a file nem nyitható meg
      * @param fileName A mentendő fájl elérési útja.
      */
     void saveFile(const String &fileName);
+
+    /**
+     * @brief Megnézi hogy a file létezik e.
+     *
+     * @param file
+     * @return Igazat ad ha a file létezik, egylbként hamisat.
+     */
+    static bool fileExists(const String &file);
 };
 
 #endif // PHONEBOOK_CONTACTS_H
