@@ -158,7 +158,7 @@ bool Contact::isPhoneNumber(const String &str)
 {
     /*
      * https://regexper.com/#%5E%5C%2B%3F%28%3F%3A36%7C06%29%5B0-9%5D%7B7%2C%7D%24
-     * Elfogadott formátum: +301236479 vagy 06301236479
+     * Elfogadott formátum: +361236479 vagy 06301236479
      */
     std::regex phonePattern("^\\+?(?:36|06)[0-9]{7,}$");
 
