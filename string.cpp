@@ -128,15 +128,11 @@ std::istream &operator>>(std::istream &is, String &s)
         is.setf(std::ios_base::skipws);
     while (is >> ch)
     {
-        if (skipwsFlag)
-            is.unsetf(std::ios_base::skipws);
+        is.unsetf(std::ios_base::skipws);
         if (ch == '\n' && !skipwsFlag)
             break;
-        if (isspace(ch) && skipwsFlag)
-        {
-            is.putback(ch);
+        else if (isspace(ch) && skipwsFlag)
             break;
-        }
         else
             s = s + ch;
     }
