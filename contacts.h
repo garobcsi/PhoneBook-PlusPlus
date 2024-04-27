@@ -46,7 +46,7 @@ public:
     /**
      * @brief Betölti a kapcsolatokat egy fájlból.
      *
-     * @throw std::runtime_error a file nem nyitható meg
+     * @throw std::runtime_error a file nem nyitható meg vagy ha a file az üres
      * @param fileName A betöltendő fájl elérési útja.
      */
     void loadFile(const String &fileName);

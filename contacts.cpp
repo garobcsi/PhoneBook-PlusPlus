@@ -24,6 +24,7 @@ void Contacts::loadFile(const String &fileName)
 {
     clear();
     std::ifstream file(fileName.c_str());
+    if (file.peek() == std::ifstream::traits_type::eof()) throw std::runtime_error("Contacts: File is empty!");
     if (!file.good()) throw std::runtime_error("Contacts: Unable to open file!");
     Contact c;
     while (file >> c)
