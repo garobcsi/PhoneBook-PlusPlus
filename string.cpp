@@ -124,12 +124,10 @@ std::istream &operator>>(std::istream &is, String &s)
     std::ios_base::fmtflags fl = is.flags();
     bool skipwsFlag = (fl & std::ios_base::skipws) != 0;
 
-    if (skipwsFlag)
-        is.setf(std::ios_base::skipws);
     while (is >> ch)
     {
         is.unsetf(std::ios_base::skipws);
-        if (ch == '\n' && !skipwsFlag)
+        if (ch == '\n')
             break;
         else if (isspace(ch) && skipwsFlag)
             break;
