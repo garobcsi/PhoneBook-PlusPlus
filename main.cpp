@@ -7,10 +7,8 @@ int main()
 {
     using namespace tabulate;
 
-    String file = "telefonkonyv.csv";
+    String fileName = "telefonkonyv.csv";
     Contacts c;
-
-    if (Contacts::fileExists(file)) c.loadFile(file);
 
     Menu mainMenu;
     Menu list;
@@ -22,10 +20,11 @@ int main()
     Menu import_file;
 
     mainMenu.Create([&]() {
+        if (Contacts::fileExists(fileName)) c.loadFile(fileName);
         while (true) {
             Menu::Clear();
             std::cout
-            << "Phonebook\n\n"
+            << "\033[47;30mPhonebook\033[0m\n\n"
             << "1) List\n"
             << "2) Create\n"
             << "3) Update\n"
@@ -82,39 +81,95 @@ int main()
                     break;
             }
         }
-    });
-
-    list.Create([](){
-        printf("%d",1);
         return 0;
     });
 
-    create.Create([](){
-        printf("%d",2);
+    list.Create([&](){
+        Menu::Clear();
+        std::cout << "\033[47;30mPhonebook: List\033[0m\n\n";
+
+        if(c.size() == 0) std::cout << "No phone numbers.";
+        else {
+            Table t;
+            t.add_row({"First Name","Last Name","Nickname","Address","Work Number","Private Number"});
+
+            for (const Contact& i : c) {
+                t.add_row({i.getFirstName().c_str(),i.getLastName().c_str(),i.getNickname().c_str(),i.getAddress().c_str(),i.getWorkNumber().c_str(),i.getPrivateNumber().c_str()});
+            }
+            std::cout << t ;
+        }
+        std::cout << std::endl << std::endl << "Press ENTER to exit";
+        std::cin.get();
         return 0;
     });
 
-    update.Create([](){
+    create.Create([&](){
+        Menu::Clear();
+        std::cout << "\033[47;30mPhonebook: Create\033[0m\n\n";
+        
+        std::cout << "First Name (optional): ";
+        String firstName;
+        std::cin >> std::noskipws >> firstName;
+
+        std::cout << "Last Name (optional): ";
+        String lastName;
+        std::cin >> std::noskipws >> lastName;
+
+        std::cout << "Nickname (optional): ";
+        String nickname;
+        std::cin >> std::noskipws >> nickname;
+
+        std::cout << "Address (optional): ";
+        String address;
+        std::cin >> std::noskipws >> address;
+
+        String workNumber;
+        while (true) {
+            std::cout << "Work Number (optional): ";
+            std::cin >> workNumber;
+            if (Contact::isPhoneNumber(workNumber) || workNumber.size() == 0) break;
+            std::cout << "Wrong Phone Number Format! Use +361231234 or 06301231234\n";
+        }
+
+        String privateNumber;
+        while (true) {
+            std::cout << "Private Number: ";
+            std::cin >> privateNumber;
+            if (c.search([&](const Contact& con){return con.getPrivateNumber() == privateNumber;}) != -1) {
+                std::cout << "Phone Number already exits\n";
+                continue;
+            }
+            if (Contact::isPhoneNumber(privateNumber)) break;
+            std::cout << "Wrong Phone Number Format! Use +361231234 or 06301231234\n";
+        }
+
+        c.pushBack({firstName,lastName,nickname,address,workNumber,privateNumber});
+        c.saveFile(fileName);
+
+        return 0;
+    });
+
+    update.Create([&](){
         printf("%d",3);
         return 0;
     });
 
-    del.Create([](){
+    del.Create([&](){
         printf("%d",4);
         return 0;
     });
 
-    search.Create([](){
+    search.Create([&](){
         printf("%d",5);
         return 0;
     });
 
-    export_file.Create([](){
+    export_file.Create([&](){
         printf("%d",6);
         return 0;
     });
 
-    import_file.Create([](){
+    import_file.Create([&](){
         printf("%d",7);
         return 0;
     });
