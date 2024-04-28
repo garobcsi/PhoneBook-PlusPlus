@@ -1,3 +1,5 @@
+#ifndef CPORTA
+
 #include "./memtrace.h"
 #include "./gtest_lite.h"
 #include "./string.h"
@@ -785,3 +787,5 @@ int main()
 
     return gtest_lite::Test::getTest().failed >= 1;
 }
+
+#endif
