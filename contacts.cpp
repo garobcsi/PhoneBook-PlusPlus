@@ -51,3 +51,8 @@ bool Contacts::fileExists(const String &file) {
     std::ifstream f(file.c_str());
     return f.good();
 }
+
+bool Contacts::fileEmpty(const String &file) {
+    std::ifstream f(file.c_str());
+    return f.peek() == std::ifstream::traits_type::eof();
+}

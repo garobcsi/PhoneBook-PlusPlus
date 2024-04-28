@@ -47,7 +47,7 @@ public:
      * @brief Betölti a kapcsolatokat egy fájlból.
      *
      * @throw std::runtime_error a file nem nyitható meg vagy ha a file az üres
-     * @param fileName A betöltendő fájl elérési útja.
+     * @param fileName A betöltendő fájl neve.
      */
     void loadFile(const String &fileName);
 
@@ -55,17 +55,25 @@ public:
      * @brief Menti a kapcsolatokat egy fájlba.
      *
      * @throw std::runtime_error a file nem nyitható meg
-     * @param fileName A mentendő fájl elérési útja.
+     * @param fileName A mentendő fájl neve.
      */
     void saveFile(const String &fileName);
 
     /**
      * @brief Megnézi hogy a file létezik e.
      *
-     * @param file
+     * @param file Fájl neve
      * @return Igazat ad ha a file létezik, egylbként hamisat.
      */
     static bool fileExists(const String &file);
+
+    /**
+     * @brief Megnézi hogy a file üres e.
+     *
+     * @param file Fájl neve
+     * @return Igazat ad ha a file üres, egylbként hamis;
+     */
+    static bool fileEmpty(const String &file);
 };
 
 #endif // PHONEBOOK_CONTACTS_H
