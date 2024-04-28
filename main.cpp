@@ -1,11 +1,16 @@
+#ifndef CPORTA
 #include "tabulate/single_include/tabulate/tabulate.hpp"
+#endif
+
 #include "./memtrace.h"
 #include "menu.h"
 #include "contacts.h"
 
 int main()
 {
+#ifndef CPORTA
     using namespace tabulate;
+#endif
 
     String fileName = "telefonkonyv.csv";
     Contacts con;
@@ -91,6 +96,7 @@ int main()
 
         if(con.size() == 0) std::cout << "No phone numbers";
         else {
+#ifndef CPORTA
             Table t;
             t.add_row({"First Name","Last Name","Nickname","Address","Work Number","Private Number"});
 
@@ -98,6 +104,7 @@ int main()
                 t.add_row({i.getFirstName().c_str(),i.getLastName().c_str(),i.getNickname().c_str(),i.getAddress().c_str(),i.getWorkNumber().c_str(),i.getPrivateNumber().c_str()});
             }
             std::cout << t ;
+#endif
         }
         std::cout << std::endl << std::endl << "Press ENTER to exit";
         std::cin.get();
@@ -260,6 +267,7 @@ int main()
                     std::cout << "Phone Number doesn't exist\n";
                 } else break;
             }
+#ifndef CPORTA
             Table t;
             t.add_row({"First Name","Last Name","Nickname","Address","Work Number","Private Number"});
 
@@ -267,6 +275,7 @@ int main()
             t.add_row({tmp.getFirstName().c_str(),tmp.getLastName().c_str(),tmp.getNickname().c_str(),tmp.getAddress().c_str(),tmp.getWorkNumber().c_str(),tmp.getPrivateNumber().c_str()});
 
             std::cout << t ;
+#endif
         }
         std::cout << std::endl << std::endl << "Press ENTER to exit";
         std::cin.get();
