@@ -77,6 +77,7 @@ int main()
                     break;
                 }
                 case 8:
+                    con.saveFile(fileName);
                     return 0;
                     break;
             }
@@ -88,7 +89,7 @@ int main()
         Menu::Clear();
         std::cout << "\033[47;30mPhonebook: List\033[0m\n\n";
 
-        if(con.size() == 0) std::cout << "No phone numbers.";
+        if(con.size() == 0) std::cout << "No phone numbers";
         else {
             Table t;
             t.add_row({"First Name","Last Name","Nickname","Address","Work Number","Private Number"});
@@ -146,10 +147,14 @@ int main()
         con.pushBack({firstName, lastName, nickname, address, workNumber, privateNumber});
         con.saveFile(fileName);
 
+
+        std::cout  << std::endl << "Contact created successfully\n\n" << "Press ENTER to exit";
+        std::cin.get();
         return 0;
     });
 
     update.Create([&](){
+        Menu::Clear();
         std::cout << "\033[47;30mPhonebook: Update\033[0m\n\n";
 
         int index = -1;
@@ -205,10 +210,13 @@ int main()
         con[index] = {firstName, lastName, nickname, address, workNumber, privateNumber};
         con.saveFile(fileName);
 
+        std::cout  << std::endl << "Contact updated successfully\n\n" << "Press ENTER to exit";
+        std::cin.get();
         return 0;
     });
 
     del.Create([&](){
+        Menu::Clear();
         std::cout << "\033[47;30mPhonebook: Delete\033[0m\n\n";
 
         int index = -1;
@@ -228,13 +236,16 @@ int main()
         con.removeEl(index);
         con.saveFile(fileName);
 
+        std::cout  << std::endl << "Contact deleted successfully\n\n" << "Press ENTER to exit";
+        std::cin.get();
         return 0;
     });
 
     search.Create([&](){
+        Menu::Clear();
         std::cout << "\033[47;30mPhonebook: Search\033[0m\n\n";
 
-        if(con.size() == 0) std::cout << "No phone numbers.";
+        if(con.size() == 0) std::cout << "No phone numbers";
         else {
             int index = -1;
             String privNum;
@@ -263,12 +274,45 @@ int main()
     });
 
     export_file.Create([&](){
-        printf("%d",6);
+        Menu::Clear();
+        std::cout << "\033[47;30mPhonebook: Export\033[0m\n\n";
+        String f;
+        while(true) {
+            std::cout << "Filename: ";
+            std::cin >> std::noskipws >> f;
+            if (Contacts::fileExists(f)) {
+                std::cout << "File already exits\n";
+            }
+            else break;
+        }
+        con.saveFile(f);
+
+        std::cout  << std::endl << "File exported successfully\n\n" << "Press ENTER to exit";
+        std::cin.get();
         return 0;
     });
 
     import_file.Create([&](){
-        printf("%d",7);
+        Menu::Clear();
+        std::cout << "\033[47;30mPhonebook: Import\033[0m\n\n";
+        String f;
+        while(true) {
+            std::cout << "Filename: ";
+            std::cin >> std::noskipws >> f;
+            if (!Contacts::fileExists(f)) {
+                std::cout << "File doesn't exits\n";
+            }
+            else break;
+        }
+        if (Contacts::fileEmpty(f)) con.clear();
+        else try {
+            con.loadFile(f);
+            con.saveFile(fileName);
+            std::cout << "\nFile imported successfully";
+        } catch (...) {std::cout << "\nFile is corrupted !"; con.loadFile(fileName); con.saveFile(fileName);}
+
+        std::cout << "\n\nPress ENTER to exit";
+        std::cin.get();
         return 0;
     });
 
