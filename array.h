@@ -98,6 +98,16 @@ public:
     Array<T> where(P pred);
 
     /**
+     * @brief Megtalálja a keresett elem indexét.
+     *
+     * @tparam P A predikátum függvény típusa.
+     * @param pred A predikátum függvény, amely meghatározza, hogy egy elem indexét a tömbben.
+     * @return Vissza adja azt az indexet ahol a Pred igaz, ha nem találja meg az elemet akkor -1 et ad vissza.
+     */
+    template <typename P>
+    int search(P pred);
+
+    /**
      * @brief Törli a tömb tartalmát és felszabadítja az általa foglalt memóriaterületet.
      *
      * Ez a függvény eltávolítja az összes elemet a tömbből, és felszabadítja az általa foglalt memóriaterületet.
@@ -307,13 +317,22 @@ Array<T> Array<T>::where(P pred)
     Array<T> tmp = *this;
     for (size_t i = 0; i < tmp.size(); ++i)
     {
-        if (!pred(tmp[i]))
+        if (!pred(tmp.operator[](i)))
         {
             tmp.removeEl(i);
             i--;
         }
     }
     return tmp;
+}
+
+template<typename T>
+template<typename P>
+int Array<T>::search(P pred) {
+    for (size_t i = 0; i < size(); ++i)
+        if (pred(this->operator[](i)))
+            return (int)i;
+    return -1;
 }
 
 template <typename T>
