@@ -537,6 +537,15 @@ int main()
         }
         END
 
+        TEST(Array,search) {
+            Array<int> arr = {1,2,3,4,5,6,7,8,9,10};
+            int index = arr.search([](int val){return val == 5;});
+            EXPECT_EQ(5,arr[index]);
+            int index2 = arr.search([](int val){return val == 12345;});
+            EXPECT_EQ(-1,index2);
+        }
+        END
+
         /*ARRAY ITERATOR CLASS TESTS*/
         {
             TEST(ArrayIteratorTest, IteratorTest)
