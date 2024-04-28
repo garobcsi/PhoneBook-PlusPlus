@@ -151,6 +151,10 @@ public:
     /**
      * @brief Túlterhelt >> operátor egy String objektum beolvasására.
      *
+     * opciók:
+     * std::noskipws nem fogja kihagyni a whitespace-ek et a string böl
+     * std::skipws kifogja hagyni whitespace-ek et a string böl
+     *
      * @param is A bemeneti adatfolyam.
      * @param s Az értéktároló String objektum.
      * @return A bemeneti adatfolyam referenciája.
