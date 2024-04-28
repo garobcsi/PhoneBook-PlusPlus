@@ -232,7 +232,33 @@ int main()
     });
 
     search.Create([&](){
-        printf("%d",5);
+        std::cout << "\033[47;30mPhonebook: Search\033[0m\n\n";
+
+        if(con.size() == 0) std::cout << "No phone numbers.";
+        else {
+            int index = -1;
+            String privNum;
+            while (true) {
+                std::cout << "Search Private Number: ";
+                std::cin >> std::noskipws >> privNum;
+                if (!Contact::isPhoneNumber(privNum))  {
+                    std::cout << "Wrong Phone Number Format! Use +361231234 or 06301231234\n";
+                    continue;
+                }
+                if ((index = con.search([&](const Contact& c){return c.getPrivateNumber() == privNum;})) == -1) {
+                    std::cout << "Phone Number doesn't exist\n";
+                } else break;
+            }
+            Table t;
+            t.add_row({"First Name","Last Name","Nickname","Address","Work Number","Private Number"});
+
+            Contact tmp = con[index];
+            t.add_row({tmp.getFirstName().c_str(),tmp.getLastName().c_str(),tmp.getNickname().c_str(),tmp.getAddress().c_str(),tmp.getWorkNumber().c_str(),tmp.getPrivateNumber().c_str()});
+
+            std::cout << t ;
+        }
+        std::cout << std::endl << std::endl << "Press ENTER to exit";
+        std::cin.get();
         return 0;
     });
 
