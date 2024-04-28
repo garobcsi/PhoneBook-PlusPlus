@@ -37,11 +37,9 @@ public:
     int Render();
 
     /**
-     * @brief Kijező törlése.
-     * 
-     * @return Hibakód visszaadása.
+     * @brief Kijező törlése. ANSI Escape Sequences -el.
      */
-    static int Clear();
+    static void Clear();
 };
 
 template <typename F>

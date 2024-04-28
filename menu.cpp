@@ -24,13 +24,6 @@ int Menu::Render() {
     }
 }
 
-int Menu::Clear() {
-#if defined _WIN32
-    int err = system("cls");
-#elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
-    int err = system("clear");
-#elif defined (__APPLE__)
-    int err = system("clear");
-#endif
-    return err;
+void Menu::Clear() {
+    printf("\033[2J\033[1;1H");
 }
