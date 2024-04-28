@@ -309,7 +309,12 @@ int main()
             con.loadFile(f);
             con.saveFile(fileName);
             std::cout << "\nFile imported successfully";
-        } catch (...) {std::cout << "\nFile is corrupted !"; con.loadFile(fileName); con.saveFile(fileName);}
+        } catch (...) {
+            std::cout << "\nFile is corrupted !";
+            if (!Contacts::fileEmpty(fileName)) {
+                con.loadFile(fileName); con.saveFile(fileName);
+            }
+        }
 
         std::cout << "\n\nPress ENTER to exit";
         std::cin.get();
