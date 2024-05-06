@@ -143,8 +143,6 @@ std::istream &operator>>(std::istream &is, Contact &c)
         is.putback(EOF);
     }
     Array<String> arr = s.split(';');
-    if (arr.size() != 6)
-        return is;
     c.setFirstName(arr[0]);
     c.setLastName(arr[1]);
     c.setNickname(arr[2]);
